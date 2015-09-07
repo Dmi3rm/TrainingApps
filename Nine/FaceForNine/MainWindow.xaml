@@ -1,0 +1,17 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="FaceForNine.MainWindow"
+	x:Name="Window"
+	Title="MainWindow"
+	Width="281" Height="339" Background="White">
+
+	<DockPanel Background="#FF00F9FF">
+		<DockPanel  Width="265"  Height="10" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Background="#FF00F9FF"/>
+		<Canvas x:Name="Field" Width="237" Height="237" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Background="#FF00F9FF"/>
+		<Canvas Width="265">
+			<Button Content="Start" x:Name="pohui" Canvas.Left="14" Canvas.Top="15" Width="50" BorderThickness="0" Click="Start"/>
+		</Canvas>
+		
+	</DockPanel>
+</Window>
