@@ -1,0 +1,43 @@
+﻿@using FS.Web.Models
+@using FS.Web.HelpClasses;
+@model FS.Web.Models.Admin.UserPaging
+
+@{
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+
+<section id="AUsersHeader">
+    <font class="AUserHeaderText">Пользователи</font> <a href="/Admin/Index" class="HeaderLink"> Админ панель </a> <a class="HeaderLink" href="/Home/Index">Главная</a>
+    <table id="ASearchUser">
+        <tr>
+            <td><font>Поиск</font></td>
+            <td><input type="search" id="SearchUserInput" /></td>
+            <td><button onclick="SearchUser(this)" id="SearchUserBtn"><img src="/Content/images/HomePage/Lupa.png" width="22" height="22" /></button></td>
+        </tr>
+</table>
+</section>
+
+<div class="Pager">
+    @Paging.GetPages(Html, (ItemPaging)Model, "AdminPageBtn", "AdminPageInput", page => Url.Action("UsersEditList", new { currentPage = page }))
+</div>
+
+
+<table id="UserList" data-page="@Model.CurrentPage">
+    @foreach (User user in Model.Users)
+    {
+        <tr>
+            <td class="UserLinkTd">@Html.ActionLink(user.Login, "AnotherUserPage", "User", new { userId = user.Id }, new { @class = "UserLink" })</td>
+            <td>
+                <font>Role = </font>
+                <input class="RoleInput" id="@user.Id" value="@user.RoleId" />
+                <button class="RoleBtn" data-userid="@user.Id" onclick="RoleBtnClicked(this)">Установить</button>
+            </td>
+            <td>@Html.ActionLink("Войти", "LogAs", "Admin", new { userId = user.Id }, new { @class = "AUserEditLink" })</td>
+            <td>@Html.ActionLink("Удалить", "RemoveUser", "Admin", new {  userId = user.Id, page = Model.CurrentPage }, new { @class = "AUserEditLink" })</td>
+        </tr>
+    }
+</table>
+
+<div class="Pager">
+    @Paging.GetPages(Html, (ItemPaging)Model, "AdminPageBtn", "AdminPageInput", page => Url.Action("UsersEditList", new { currentPage = page }))
+</div>

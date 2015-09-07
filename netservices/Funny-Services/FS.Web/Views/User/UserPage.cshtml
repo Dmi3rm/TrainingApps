@@ -1,0 +1,54 @@
+﻿@using FS.Web.Models;
+@model User
+@{
+    Layout = "~/Views/Shared/User/_UserLayout.cshtml";
+}
+
+@section Title {
+    @Model.Login
+}
+
+    <img class="AvaImg" src="@Url.Action("GetImage", "User")" />
+
+    <center class="UserName"><b><font style="font-size:18px;">@Model.Login</font></b></center>
+
+    <a href="" class="UserMenuLinkInactive">Друзья</a>
+    <a href="" class="UserMenuLinkInactive">Подписчики</a>
+    <a href="" class="UserMenuLinkInactive">Сообщения</a>
+    <a href="" class="UserMenuLink" id="AvaBtn">Аватарка</a>
+    <a href="" class="UserMenuLink" id="PasswordBtn">Пароль</a>
+
+<div id="ChangeAvaDiv" style="display:none; margin-left:15px;">
+    <br />
+    @using (Html.BeginForm("ChangeAva", "User", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+    {
+        <div>
+            Изменить аватарку <input type="file" name="image" /> <input type="submit" value="Изменить" />
+        </div>
+    }
+</div>
+
+
+<div id="ChangePasswordDiv" style="display:none; margin-left:15px;">
+    @using (Html.BeginForm("ChangePassword", "User", FormMethod.Post, new { role = "form" }))
+    {
+        <br />
+        <table id="ChangePasswordTable">
+            <tr>
+                <td><label>Старый пароль</label></td>
+                <td><input name="oldPassword" type="password" /></td>
+            </tr>
+            <tr>
+                <td><label>Новый пароль</label></td>
+                <td><input name="newPassword" type="password" /></td>
+            </tr>
+            <tr>
+                <td><label>Повторите новый пароль</label></td>
+                <td><input name="confirmPassword" type="password" /></td>
+            </tr>
+        </table>
+
+        <input type="submit" value="Изменить" />
+    }
+</div>
+

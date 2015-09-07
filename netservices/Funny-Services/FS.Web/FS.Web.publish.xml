@@ -1,0 +1,9 @@
+<publishData>
+  <publishProfile
+    publishUrl="https://newclear-001-site1.smarterasp.net:8172/msdeploy.axd"
+    msdeploySite="newclear-001-site1"
+    destinationAppUrl="http://newclear-001-site1.smarterasp.net/"
+    profileName="Default Settings"
+    publishMethod="MSDeploy"
+    userName="ifc\newclear-001" />
+</publishData>

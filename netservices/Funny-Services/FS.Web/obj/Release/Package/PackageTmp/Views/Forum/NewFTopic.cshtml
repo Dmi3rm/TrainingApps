@@ -1,0 +1,36 @@
+﻿@using FS.Web.Models;
+
+@{
+    Layout = "~/Views/Shared/Forum/_ForumLayout.cshtml";
+}
+
+@section Title {
+    NS Forum: Новая тема
+}
+
+@section FSearch {
+    <button onclick="Search(this)" id="SearchForumBtn"><img src="/Content/images/HomePage/Lupa.png" width="22" height="22" /></button>
+}
+
+@section FPlace {
+    <tr id="FPlace">
+        <td><center>@Html.ActionLink("<< Темы <<", "FTopics", "Forum", new { subsectionId = @ViewData["FSubsectionId"], sectionId = @ViewData["FSectionId"] }, new { @class = "HeaderLink" })</center></td>
+        <td><center>Новая тема</center></td>
+        <td><center>&nbsp;</center></td>
+    </tr>
+}
+
+<section id="FItems" class="NewItemSection">
+    <center>
+        @using (Html.BeginForm("NewFTopic", "Forum", FormMethod.Post))
+        {
+            <label for="Name">Название</label>
+            <input type="text" name="tName" id="STName" maxlength="50"/>
+
+            <input type="number" name="subsectionId" value="@ViewData["FSubsectionId"]" style="display:none;" />
+            <input type="number" name="sectionId" value="@ViewData["FSectionId"]" style="display:none;" />
+
+            <input type="submit" value="Создать" />
+        }
+    </center>
+</section>

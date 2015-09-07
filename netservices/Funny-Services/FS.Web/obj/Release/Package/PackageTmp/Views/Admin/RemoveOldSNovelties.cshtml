@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/Content/StylesAdmin.css" />
+}
+
+@Html.ActionLink("<< Cancel <<", "Index")<font style="margin-left:35%; font-size:20px; ">Add / Edit media content</font>
+<table style="width:93%; border:2px solid black;">
+    <tr style="width:100%;">
+        <td style="width: 33%; border-right: 2px solid black; position: relative;">
+            <font style="display: block; width: 100%; text-align: center; font-size: 15px; font-weight: 600; position:absolute; top:0px; ">Greetings</font>
+            <div style="width: 100%;" id="PicsContainer">
+
+            </div>
+        </td>
+
+        <td style="width:33%; border-right:2px solid black; position:relative;">
+            <font style="display: block; width: 100%; text-align: center; font-size: 15px; font-weight: 600; position: absolute; top: 0px;">Novations</font>
+            <div style="width: 100%;" id="SonsContainer">
+
+            </div>
+        </td>
+
+        <td style="position: relative; ">
+            <font style="display: block; width: 100%; text-align: center; font-size: 15px; font-weight: 600; position: absolute; top: 0px; ">Notes</font>
+            <div style="width:100%; " id="VidsContainer">
+
+            </div>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,51 @@
+﻿@model FS.Web.Models.RegisterModel
+
+@using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Регистрация</h4>
+    <hr />
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "loginLabel" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "loginField", maxlength = "50" })
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "passwordLabel", maxlength = "50" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "passwordField" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "passwordLabel", maxlength = "50" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "passwordField" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        </div>
+    </div>
+    
+    <table id="RegTable">
+        <tr>
+            <td><img src='@Url.Action("Captcha", "Account")' alt='captcha' /></td>
+            <td style="padding-left:5px;">
+                @Html.LabelFor(model => model.Captcha)
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.Captcha, new { @class = "captchaField" })
+                    @Html.ValidationMessageFor(model => model.Captcha)
+                </div>
+            </td>
+        </tr>
+    </table>
+
+   
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Продолжить" class="AuthBtn" />
+        </div>
+    </div>
+}
+

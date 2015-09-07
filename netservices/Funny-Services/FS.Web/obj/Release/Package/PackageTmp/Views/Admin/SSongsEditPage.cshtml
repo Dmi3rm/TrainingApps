@@ -1,0 +1,27 @@
+﻿@using FS.Web.Models;
+@model List<SSong>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/Content/StylesAdmin.css" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/AdminScript.js")
+}
+
+@Html.ActionLink("<< Cancel <<", "Index")<font style="margin-left:35%; font-size:20px; font-weight:900;">Edit Songs</font>
+@for (int i = Model.Count() - 1; i >= 0; i--)
+{
+    SSong ssong = Model[i];
+    <article class="NewArticle">
+        <font id="">@ssong.Name</font>
+        <button data-name="@ssong.Name" onclick="ShowSongBtnClicked(this)">Show</button>
+        @Html.ActionLink("Edit", "EditSSong", "Admin", new { SSongId = ssong.Id }, new { @class = "EditNewLink" })
+        @Html.ActionLink("Remove", "RemoveSSong", "Admin", new { ssongId = ssong.Id }, new { @class = "RemoveNewLink" })
+        <div id="@ssong.Name"></div>
+    </article>
+}

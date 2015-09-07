@@ -1,0 +1,15 @@
+﻿@using FS.Web.Models;
+@model List<SPicture>
+
+
+@for (int i = Model.Count() - 1; i >= 0; i--)
+{
+    SPicture spicture = Model[i];
+    <article class="NewArticle">
+        <font id="">@spicture.Name</font>
+        <button data-name="@spicture.Name" onclick="ShowBtnClicked(this)">Show</button>
+        @Html.ActionLink("Edit", "EditSPicture", "Admin", new { SPictureId = spicture.Id }, new { @class = "EditNewLink" })
+        @Ajax.ActionLink("Remove", "RemoveSPicture", "Admin", new { spictureId = spicture.Id }, new AjaxOptions { }, new { @class = "RemoveNewLink" })
+        <div id="@spicture.Name"></div>
+    </article>
+}

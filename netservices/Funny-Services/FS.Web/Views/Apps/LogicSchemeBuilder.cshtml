@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Логические схемы</title>
+    <link rel="stylesheet" href="~/Content/StylesLogicSchemeBuilder.css" />
+</head>
+
+<body>
+    <menu>
+        <a href="/Home/Index" style="display:block"><img src="~/Content/images/LogicSchemeBuilder/Rubbish.png" id="Rubbish" width="19" height="19" /></a>
+            <ul class="menu">
+
+
+                <li>
+                    <a href="#">Edit</a>
+                    <ul>
+                        <li><a id="add" href="#">Add</a></li>
+                        <li><a id="change" href="#">Change</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#">Scale</a>
+                    <ul>
+                        <li><a id="small" href="#">Small</a></li>
+                        <li><a id="middle" href="#">Middle</a></li>
+                        <li><a id="large" href="#">Large</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="/Apps/LSBHelp">Help</a>
+                </li>
+            </ul>
+
+</menu>
+
+    <section id="workingPanel">
+        <div id="instruments">
+            <label id="InstrLabel">INSTRUMENTS</label>
+            <ul>
+                <li><img id="AndBtn" src="~/Content/images/LogicSchemeBuilder/OrElem.png" height="30" width="30"></img></li>
+                <li><img id="OrBtn" src="~/Content/images/LogicSchemeBuilder/AndElem.png" height="30" width="30"></img></li>
+                <li><img id="NotBtn" src="~/Content/images/LogicSchemeBuilder/NotElem.png" height="30" width="30"></img></li>
+            </ul>
+        </div>
+        <div id="appRun">
+            <label>Application</label>
+            <ul>
+                <li><img id="RunBtn" src="~/Content/images/LogicSchemeBuilder/Run.png" height="30" width="30"></img></li>
+                <li><img id="StepBtn" src="~/Content/images/LogicSchemeBuilder/Step.png" height="30" width="30"></img></li>
+                <li><img id="RestartBtn" src="~/Content/images/LogicSchemeBuilder/Restart.png" height="30" width="30"></img></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="workingPlace">
+        <canvas id="logicField" width=1340 height=557></canvas>
+    </section>
+
+    <section id="Reserv">
+        <img src="~/Content/images/LogicSchemeBuilder/AndElem.png" id="OrElem" />
+        <img src="~/Content/images/LogicSchemeBuilder/OrElem.png"  id="AndElem" />
+        <img src="~/Content/images/LogicSchemeBuilder/NotElem.png" id="NotElem" />
+        <img src="~/Content/images/LogicSchemeBuilder/One.png" id="One" />
+        <img src="~/Content/images/LogicSchemeBuilder/Zero.png" id="Zero" />
+        <img src="~/Content/images/LogicSchemeBuilder/Question.png" id="Question" />
+        <img src="~/Content/images/LogicSchemeBuilder/Rubbish.png" id="Rubbish" />
+    </section>
+
+    @Scripts.Render("~/Scripts/Jquery/jquery-1.10.2.min.js")
+    @Scripts.Render("~/Scripts/Jquery/jquery-1.10.2.intellisense.js")
+    @Scripts.Render("~/Scripts/Apps/LogicSchemeBuilder/LogicSchemeBuilder.js")
+</body>
+</html>

@@ -1,0 +1,18 @@
+﻿@model FS.Web.Models.FoundFMessage
+
+
+<div style="text-align:center; background:orange;">
+    @Html.ActionLink(Model.FSection.Name, "FSubsections", "Forum", new { sectionId = Model.FSection.Id },
+                                    new { @class = "SectionLink", @style="display:inline;" }) >>
+    @Html.ActionLink(Model.FSubsection.Name, "FTopics", "Forum", new
+                           {
+                               subsectionId = Model.FSubsection.Id,
+                               sectionId = Model.FSection.Id
+                           }, new { @class = "SectionLink", @style = "display:inline;" }) >>
+    @Html.ActionLink(Model.FTopic.Name, "FMessages", "Forum", new
+                    {
+                        topicId = Model.FTopic.Id,
+                        subsectionId = Model.FSubsection.Id,
+                        sectionId = Model.FSection.Id
+                    }, new { @class = "SectionLink", @style = "display:inline;" })
+</div>

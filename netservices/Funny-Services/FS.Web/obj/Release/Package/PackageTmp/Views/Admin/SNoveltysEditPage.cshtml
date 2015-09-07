@@ -1,0 +1,29 @@
+﻿@using FS.Web.Models.Home;
+@model List<SNovelty>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/Content/StylesAdmin.css" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/AdminScript.js")
+}
+
+
+@Html.ActionLink("<< Cancel <<", "Index")<font style="margin-left:35%; font-size:20px; font-weight:900;">Edit novelties</font>
+
+
+@for (int i = Model.Count() - 1; i >= 0; i--)
+{
+    SNovelty snovelty = Model[i];
+    <article class="NewArticle">
+        @Html.ActionLink("Edit", "EditSNovelty", "Admin", new { SNoveltyId = snovelty.Id }, new { @class="EditNewLink" })
+        @Html.ActionLink("Remove", "RemoveSNovelty", "Admin", new { SNoveltyId = snovelty.Id }, new { @class = "RemoveNewLink" })
+        @Html.Raw(System.Web.HttpUtility.HtmlDecode(@snovelty.htmlcode))
+        <hr />
+    </article>
+}

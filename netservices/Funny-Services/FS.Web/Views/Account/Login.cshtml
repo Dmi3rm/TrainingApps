@@ -1,0 +1,36 @@
+﻿@model FS.Web.Models.LogOnModel
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Вход</h4>
+    <hr />
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "loginLabel" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "loginField", maxlength = "50" })
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "passwordLabel" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "passwordField", maxlength = "50" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+    </div>
+    <div class="checkboxDiv">
+        <div class="col-md-offset-2 col-md-10">
+            <table class="checkbox"><tr>
+            <td>@Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkboxField" })</td>
+            <td style="padding-bottom:2px;">@Html.LabelFor(m => m.RememberMe, new { @class = "checkboxLabel" })</td>
+            </tr></table>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Вход" class="AuthBtn" />
+        </div>
+    </div>
+}

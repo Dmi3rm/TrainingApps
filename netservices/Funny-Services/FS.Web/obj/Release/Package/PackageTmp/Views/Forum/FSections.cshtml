@@ -1,0 +1,138 @@
+﻿@using FS.Web.Models;
+@model List<FS.Web.Models.FSection>
+
+@{
+    Layout = "~/Views/Shared/Forum/_ForumLayout.cshtml";
+}
+
+@section Title {
+    NS Forum: Разделы
+}
+
+@section FSearch {
+    <button onclick="Search(this)" id="SearchForumBtn"><img src="/Content/images/HomePage/Lupa.png" width="22" height="22" /></button>
+}
+
+@section FPlace {
+    <tr>
+        <td><center>@Html.ActionLink("<< Главная <<", "Index", "Home", null, new { @class = "HeaderLink" })</center></td>
+        <td><center>Разделы</center></td>
+        @if ((int)ViewData["Role"] == 2)
+        {
+        <td><center>@Html.ActionLink("Новый раздел", "NewFSection", "Forum", null, new { @class = "HeaderLink" })</center></td>
+        }
+    </tr>
+}
+
+@if (Model.Count > 0) { 
+<table id="FItems" data-fsectionid="0" cellspacing="0">
+    <thead>
+        <tr id="FBodyHeadTr">
+            <td class="FixHTd"><center>&nbsp</center></td>
+            <td class="LowLinkHTd"><center><font>Название</font></center></td>
+            <td class="Stat1H"><center><font>Разделов</font></center></td>
+            <td class="Stat2H"><center><font>Тем</font></center></td>
+            <td class="Stat3HDate"><center><font>Сообщений</font></center></td>
+        </tr>
+    </thead>
+    <tbody>
+        @if ((int)ViewData["Role"] == 2)
+        {
+            foreach (FSection fsection in Model)
+            {
+                <tr class="FBodyTr" id="@fsection.Id">
+                    <td class="FixTd">
+                        @if (fsection.Closed == 0)
+                        {
+                            <button id="lockBtn" onclick="Lock(this)" data-fsectionId="@fsection.Id"><img src="/Content/images/Forum/Greenpencil.png" width="22" height="22"></button>
+                        }
+                        else
+                        {
+                            <button id="unlockBtn" onclick="Lock(this)" data-fsectionid="@fsection.Id"><img src="/Content/images/Forum/Zamok.png" width="22" height="22"></button>
+                        }
+                    </td>
+                    <td class="AdminLowLinkTd">
+                        <table style="width:100%;">
+                            <tr style="width:100%;">
+                                <td class="AdminLowLinkTextTd">
+                                    @Html.ActionLink(fsection.Name, "FSubsections", "Forum", new { sectionId = fsection.Id },
+                                    new { @class = "SectionLink" })
+                                </td>
+                                <td class="AdminEditHandTd"><button data-fsectionId="@fsection.Id" data-Name="@fsection.Name" onclick="EditItem(this)" class="AdminEditHandBtn"><img src="/Content/images/Forum/Hand.png" width="22" height="22"></button></td>
+                                <td class="AdminDeleteMusorTd"><a data-fsectionid="@fsection.Id" data-name="@fsection.Name" onclick="DeleteItem(this)" class="AdminDeleteMusorBtn"><img src="/Content/images/Forum/Musor.png" width="22" height="22"></a></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="Stat1"><center>@fsection.NumFSubsections</center></td>
+                    <td class="Stat2"><center>@fsection.NumFTopics</center></td>
+                    <td class="Stat3"><center>@fsection.NumFMsgs</center></td>
+                </tr>
+            }
+        }
+        else
+        {
+            foreach (FSection fsection in Model)
+            {
+                <tr class="FBodyTr" id="@fsection.Id">
+                    <td class="FixTd">
+                        @if (fsection.Closed == 0)
+                        {
+                            <button><img src="/Content/images/Forum/Greenpencil.png" width="22" height="22"></button>
+                        }
+                        else
+                        {
+                            <button><img src="/Content/images/Forum/Zamok.png" width="22" height="22"></button>
+                        }
+                    </td>
+                    <td class="LowLinkTd">
+                        @Html.ActionLink(fsection.Name, "FSubsections", "Forum", new { sectionId = fsection.Id, },
+                                    new { @class = "SectionLink" })
+                    </td>
+                    <td class="Stat1"><center>@fsection.NumFSubsections</center></td>
+                    <td class="Stat2"><center>@fsection.NumFTopics</center></td>
+                    <td class="Stat3"><center>@fsection.NumFMsgs</center></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+}
+else
+{
+    <section class="NoItemsSection">
+        <center>Разделов пока нет</center>
+    </section>
+}
+
+<div id="Dialog" class="Dialog">
+    <div id="DialogTitle" class="DialogTitle">
+
+    </div>
+
+    <button class="DialogBtn" id="RenameItemBtn" onclick="RenameItem()">Переименовать</button>
+    @if ((int)ViewData["AllowInput"] == 1)
+    {
+        <button class="DialogBtn" id="InputItemBtn" onclick="InputItem()">Вставить</button>
+    }
+    else
+    {
+        <button class="InputNoItem" id="InputItemBtn">Вставить</button>
+    }
+</div>
+
+
+<div id="RenameDialog" class="Dialog">
+    <div id="RenameDialogTitle" class="DialogTitle">
+
+    </div>
+
+    <input id="RenameItemInput" maxlength="50" />
+    <button class="RenameFinallyBtn" onclick="RenameFinally()">Переименовать</button>
+</div>
+
+
+<div id="MsgDialog" class="Dialog">
+    <div id="MsgDialogTitle" class="DialogTitle">
+
+    </div>
+</div>

@@ -1,0 +1,10 @@
+﻿@using FS.Web.Models.Home
+@model List<SNovelty>
+
+@for (int i = Model.Count() - 1; i >= 0; i-- )
+{
+    SNovelty snovelty = Model[i];
+    <article class="NewArticle">
+        @Html.Raw(System.Web.HttpUtility.HtmlDecode(@snovelty.htmlcode))
+    </article>
+}

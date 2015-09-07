@@ -1,0 +1,124 @@
+﻿@using FS.Web.Models.Home
+@model SNovelty
+
+@{
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+
+@section Scripts {
+<script>
+    var currentType = $("#TypeValueInput").val();
+    if (currentType == "1") {
+        $("#GreetingRadio").attr("checked", "checked");
+    }
+    if (currentType == "2") {
+        $("#NovationRadio").attr("checked", "checked");
+    }
+    if (currentType == "3") {
+        $("#NoteRadio").attr("checked", "checked");
+    }
+    $("#GreetingRadio").click(function () { $("#TypeValueInput").val(1); })
+    $("#NovationRadio").click(function () { $("#TypeValueInput").val(2); })
+    $("#NoteRadio").click(function () { $("#TypeValueInput").val(3); })
+</script>
+
+<script>
+    function FindContent (adress)
+    {
+        var htmlcode = $("#HtmlCode").val(); // ищем в этой строке
+        var content = "";
+
+        var pos = 0;
+        while (true)
+        {
+            var foundPos = htmlcode.indexOf(adress, pos);
+            if (foundPos == -1) break;
+
+            foundPos = foundPos + adress.length;
+            endPos = htmlcode.indexOf("\"", foundPos);
+
+            name = htmlcode.substring(foundPos, endPos);
+            
+            content = content + name;
+            content = content + "!";
+
+            pos = foundPos; // продолжить поиск со следующей
+        }
+
+        return content;
+    }
+
+    $("#RefreshMedia").click(function ()
+    {
+        var images = FindContent("/Home/pic?name=");
+        var songs = FindContent ("/Home/son?name=");
+        var videos = FindContent("/Home/vid?name=");
+
+        GetPicturesByNovelty(images);
+        GetSongsByNovelty(songs);
+        GetVideosByNovelty(videos);
+    })
+
+    $("#RefreshMedia").click();
+</script>
+}
+
+@Html.ActionLink("<< Cancel <<", "Index")<font style="margin-left:30%;  font-size:25px; font-weight:600;">Add / Edit novelty</font>
+
+@using (Html.BeginForm("EditSNovelty", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div style="margin-bottom:20px; margin-top:20px;">
+        <label for="Name" style="margin-right:4%;">Name</label>
+        <input name="Name" type="text" value="@Model.Name" maxlength="50" />
+    </div>
+
+    <div style="margin-bottom:20px;">
+        <label for="Type" style="margin-right:5%;">Type</label><input id="TypeValueInput" name="Type" value="@Model.Type" type="hidden" />
+        <label >Greeting</label><input type="radio" value="1" name="Type" style="margin-right:20%;" id="GreetingRadio"/>
+        <label >Novation</label><input type="radio" value="2" name="Type" style="margin-right:20%;" id="NovationRadio"/>
+        <label>Note</label><input type="radio" value="3" name="Type" id="NoteRadio"/>
+        
+
+    </div>
+
+    <div style="margin-bottom:20px;" >
+        <label for="htmlcode" style="display: block; float: left; margin-right: 5%;">Html</label>
+        <textarea name="htmlcode" rows="15" cols="150" id="HtmlCode">@Model.htmlcode</textarea>
+</div>
+
+    
+    <input type="submit" value="Save" />
+    
+}
+<button id="RefreshMedia">Refresh Media Content</button>
+
+<br />
+<font style="margin-left:40%; font-size:20px; ">Add / Edit media content</font>
+<table style="width:93%; border:2px solid black;">
+    <tr style="width:100%;">
+        <td style="width: 33%; border-right: 2px solid black; position: relative;">
+            <font style="display: block; width: 100%; text-align: center; font-size: 15px; font-weight: 600; position:absolute; top:0px; ">Images</font>
+            @Html.Action("AddSPicture", "Admin")
+            <div style="width: 100%;" id="PicsContainer">
+
+            </div>
+        </td>
+
+        <td style="width:33%; border-right:2px solid black; position:relative;">
+            <font style="display: block; width: 100%; text-align: center; font-size: 15px; font-weight: 600; position: absolute; top: 0px;">Songs</font>
+            @Html.Action("AddSSong", "Admin")
+            <div style="width: 100%;"  id="SonsContainer">
+
+            </div>
+        </td>
+            
+        <td style="position: relative; ">
+            <font style="display: block; width: 100%; text-align: center; font-size: 15px; font-weight: 600; position: absolute; top: 0px; ">Movies</font>
+            @Html.Action("AddSVideo", "Admin")
+            <div style="width:100%; " id="VidsContainer">
+
+            </div>
+        </td>
+    </tr>
+</table>

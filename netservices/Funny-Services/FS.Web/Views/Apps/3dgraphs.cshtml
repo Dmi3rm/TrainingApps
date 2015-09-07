@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>3D Графики</title>
+    <link rel="stylesheet" href="~/Content/3dgraphs/StylesHome.css" />
+    <link rel="stylesheet" href="~/Content/3dgraphs/StylesAbout.css"/>
+</head>
+
+<body>
+    <section id="Menu">
+        <section id="Header">
+            <font id="headText" class="fittext">3D Графики</font>
+        </section>
+
+        <section id="FuncGraph">
+            <div id="FuncGraphHeadDiv">
+                <font id="FuncGraphHeadFont">Построить график функции</font>
+            </div>
+            <div id="FuncGraphFunctions">
+                <div>
+                    <label style="background: #00FF00">x(t) =</label>
+                    <input id="Xfunc" value="t*cos(t)"/>
+                </div>
+                <div>
+                    <label style="background: #519efc">y(t) =</label>
+                    <input id="Yfunc" value="t*sin(t)" />
+                </div>
+                <div>
+                    <label style="background:#ff4848">z(t) =</label>
+                    <input id="Zfunc" value="t" />
+                </div>
+            </div>
+
+            
+            <button id="FuncGraphBtn">Построить</button>
+        </section>
+        
+        <section id="EqGraph">
+            <div id="EqGraphHeadDiv">
+                <font id="EqGraphHeadFont">Построить график уравнения</font>
+            </div>
+            <div id="EqGraphFunctions">
+                <div>
+                    <label style="background: #00FF00">x'(&nbsp) =</label>
+                    <input id="Xeq" value="x+3*y" />
+                </div>
+                <div>
+                    <label style="background: #519efc; ">y'(&nbsp) =</label>
+                    <input id="Yeq" value="-6*x-5*y" />
+                </div>
+                <div>
+                    <label style="background: #ff4848">z'(&nbsp) =</label>
+                    <input id="Zeq" value="z+x" />
+                </div>
+            </div>
+
+            <div id="EqGraphValues">
+                <div>
+                    <label>x0 =</label>
+                    <input id="Xpoint" type="number" value="1" />
+                </div>
+                <div>
+                    <label>y0 =</label>
+                    <input id="Ypoint" type="number" value="1" />
+                </div>
+                <div>
+                    <label>z0 =</label>
+                    <input id="Zpoint" type="number" value="0" />
+                </div>
+            </div>
+
+            
+            <button id="EqGraphBtn">Построить</button>
+            <button id="EqRandomBtn">Построить 3</button>
+        </section>
+
+        <button id="Clean">Очистить</button>
+
+        <section id="Parameters">
+            <div id="ParametersHeadDiv">
+                <font id="ParametersFont">Параметры</font>
+                <button id="FieldParameters">Поле</button>
+                <button id="GraphParameters">График</button>
+            </div>
+
+            <table id="FieldSettings">
+                <tr>
+                    <td><label>Масштаб&nbsp(px)&nbsp</label></td>
+                    <td><input id="ScaleInput" type="number" value="5" /></td>
+                </tr>
+                <tr>
+                    <td><label>Клеток&nbsp</label></td>
+                    <td><input id="CellInput" type="number" value="30" /></td>
+                </tr>
+                <tr>
+                    <td><label>Сетка</label></td>
+                    <td><button id="TurnOffGridBtn">Скрыть сетку</button><button id="TurnOnGridBtn">Показать сетку</button></td>
+                </tr>
+                <tr>
+                    <td><label>Камера</label></td>
+                    <td>
+                        <label>Перспективная</label><input type="radio" name="cam" id="PerspectiveRadio" checked="checked"/>
+                        <label>Ортогональная</label><input type="radio" name="cam" id="OrthographicRadio"/>
+                    </td>
+                </tr>
+            </table>
+                
+            
+
+
+            <table id="GraphSettings">
+                <tr>
+                    <td><label>Диапазон</label></td>
+                    <td><input id="DiapasonInput" type="number" value="30" /></td>
+                </tr>
+                <tr>
+                    <td><label>Шаг&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label></td>
+                    <td><input id="StepInput" type="number" value="0.01" /></td>
+                </tr>
+                <tr>
+                    <td><label>Цвет графика</label></td>
+                    <td><input type="color" id="ColorPicker" /></td>
+                </tr>
+            </table>
+        </section>
+
+        <footer>
+            <a href="#openModal" id="About">О программе</a>
+        </footer>
+
+    </section>
+
+    
+
+
+    <section id="GraphField">
+        <canvas id="GraphCanvas"></canvas>
+    </section>
+
+    <div id="openModal" class="modalDialog">
+        <div id="dral" draggable="true">
+            <a href="#close" title="Close" class="close">X</a>
+            <h3>3D Графики</h3>
+            <div class="dlgContent">
+                
+                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbspДанная программа позволяет строить трехмерные графики функций, заданных параметрически, а также
+                     фазовые портреты дифференциальных уравнений (используется метод Эйлера). Чтобы помочь новичку быстро освоить программу, во
+                     все поля введены некоторые начальные значения. Поэтому, чтобы сразу увидеть результат, достаточно кликнуть на любой из кнопок
+                     "Построить".
+                <br />
+                <p>
+                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbspЗажмите левую кнопку мыши на графическом поле и потаскайте курсор. График будет показан с разных
+                     ракурсов. Чтобы приблизить / отдалить изображение покрутите колесико.
+                </p>
+                <p>
+                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbspМожно вводить свои функции и изменять стандартные настройки. Чтобы перестроить поле/график с учетом
+                     новых настроек кликните "Очистить". <br />
+                     &nbsp&nbsp&nbspВ параметрах поля можно менять масштаб, число клеток, включать/выключать сетку, выбрать камеру.
+                     Масштаб регулирует число пикселей в единичном отрезке. </br>
+                     &nbsp&nbsp&nbspВ параметрах графика можно изменить диапазон, шаг и цвет. Чем больше диапазон, тем длиннее график, но тем дольше он,
+                    соответственно строится. Чем меньше шаг, тем точнее будет график, но и скорость его постройки тоже уменьшится.
+                </p>
+                <br />
+                <p style="text-align:center">Дмитрий Румянцев, Май 2015</p>
+            </div>
+        </div>
+    </div>
+
+
+    
+    
+    @Scripts.Render("~/Scripts/Apps/3dgraphs/about.js")
+    @Scripts.Render("~/Scripts/Jquery/jquery-1.10.2.min.js")
+    @Scripts.Render("~/Scripts/Apps/3dgraphs/three.js")
+    @Scripts.Render("~/Scripts/Apps/3dgraphs/TrackballControls.js")
+    @Scripts.Render("~/Scripts/Apps/3dgraphs/math.js")
+    @Scripts.Render("~/Scripts/Apps/3dgraphs/GraphScript.js")
+</body>
+</html>

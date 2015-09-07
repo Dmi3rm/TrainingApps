@@ -1,0 +1,27 @@
+﻿@using FS.Web.Models
+@model SPicture
+
+@using (Html.BeginForm("EditSPicture", "Admin", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    <div style="margin-top:15px;">
+        @if (Model.PictureData == null)
+        {
+            
+        }
+        else
+        {
+            <img width="150" height="150" src="@Url.Action("pic", "Home", new { name = Model.Name })" />
+        }
+        <div>
+            Upload new Image:
+            <input type="file" name="Image" />
+        </div>
+    </div>
+    
+    <div style="display:none;">@Html.EditorFor(m => m.Id)</div>
+    @Html.LabelFor(m => m.Name)
+    @Html.TextBoxFor(m => m.Name, new { maxlength = "50" })
+
+    <input type="submit" value="Save" />
+}
+

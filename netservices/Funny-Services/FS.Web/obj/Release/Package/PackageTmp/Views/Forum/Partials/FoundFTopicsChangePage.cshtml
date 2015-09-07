@@ -1,0 +1,135 @@
+﻿@using FS.Web.HelpClasses;
+@using FS.Web.Models;
+@model FoundFTpcPaging
+
+
+<div class="Pager">
+    @Paging.GetPages(Html, (ItemPaging)Model, "SearchFTopicsPageBtn", "SearchFTopicsPageInput", page => Url.Action("FoundFTopicsChangePage", new { page = page }))
+</div>
+
+<table id="FTopics" cellspacing="0">
+    <tr id="FBodyHeadTr">
+        <td class="FixHTd"><center>&nbsp</center></td>
+        <td class="LowLinkHTd"><center><font>Название</font></center></td>
+        <td class="Stat1H"><center><font>Просмотров</font></center></td>
+        <td class="Stat2H"><center><font>Сообщений</font></center></td>
+        <td class="Stat3HDate"><center><font>Посл. Сообщ.</font></center></td>
+    </tr>
+
+    @if (true)
+    {
+        KeyValuePair<string, object> FSectionKey = new KeyValuePair<string, object>("FSectionId", 0);
+        KeyValuePair<string, object> FSubsectionKey = new KeyValuePair<string, object>("FSubsectionId", 0);
+        KeyValuePair<string, object> FKey1 = new KeyValuePair<string, object>("FSectionClosed", 0);
+        KeyValuePair<string, object> FKey2 = new KeyValuePair<string, object>("FSubsectionClosed", 0);
+        ViewData.Add(FSectionKey);
+        ViewData.Add(FSubsectionKey);
+        ViewData.Add(FKey1);
+        ViewData.Add(FKey2);
+        foreach (FoundFTopic foundFTopic in Model.FoundFTopics)
+        {
+            FTopic topic = foundFTopic.FTopic;
+            ViewData["FSectionId"] = foundFTopic.FSection.Id;
+            ViewData["FSubsectionId"] = topic.FSubsectionId;
+            ViewData["FSectionClosed"] = foundFTopic.FSection.Closed;
+            ViewData["FSubsectionClosed"] = foundFTopic.FSubsection.Closed;
+            
+            
+            
+            
+            
+            if ((int)ViewData["Role"] == 2)
+            { 
+                <tr class="FBodyTr">
+                <td class="FixTd">
+                @if ((topic.Closed == 0) && ((int)ViewData["FSectionClosed"] == 0) && ((int)ViewData["FSubsectionClosed"] == 0))
+                {
+                    <button id="lockBtn" onclick="Lock(this)" data-ftopicid="@topic.Id"><img src="/Content/images/Forum/Greenpencil.png" width="22" height="22"></button>
+                }
+                else
+                {
+                    <button id="unlockBtn" onclick="Lock(this)" data-ftopicid="@topic.Id"><img src="/Content/images/Forum/Zamok.png" width="22" height="22"></button>
+                }
+                </td>
+                <td class="AdminLowLinkTd">
+                <table>
+                    <tr>
+                        <td class="AdminLowLinkTextTd">
+                            @Html.ActionLink(topic.Name, "FMessages", "Forum", new
+                            {
+                                topicId = topic.Id,
+                                subsectionId = (int)ViewData["FSubsectionId"],
+                                sectionId = (int)ViewData["FSectionId"]
+                            }, new { @class = "SectionLink" })
+                        </td>
+                        <td class="AdminEditHandTd"><button data-fix="@topic.Fix" data-ftopicid="@topic.Id" data-name="@topic.Name" onclick="EditItem(this)" class="AdminEditHandBtn"><img src="/Content/images/Forum/Hand.png" width="22" height="22"></button></td>
+                        <td class="AdminDeleteMusorTd"><button data-ftopicid="@topic.Id" data-fsubsectionid="@ViewData["FSubsectionId"]" data-fsectionid="@ViewData["FSectionId"]" data-name="@topic.Name" onclick="DeleteItem(this)" class="AdminDeleteMusorBtn"><img src="/Content/images/Forum/Musor.png" width="22" height="22"></button></td>
+                    </tr>
+                </table>
+                </td>
+                <td class="Stat1"><center>@topic.NumViews</center></td>
+                <td class="Stat2"><center>@topic.NumFMsgs</center></td>
+                <td class="Stat3Date">
+                <center>
+                @if (topic.UserId != 0)
+                {
+                    @Html.ActionLink(topic.User.Login, "AnotherUserPage", "User", new { userId = topic.UserId }, new { @class = "UserLink" })
+                    <br />@topic.LastFMsgDate.ToString("dd MMM yy в HH:mm")
+                }
+                else
+                {
+                    <font>Нет</font>
+                }
+                </center>
+                </td>
+                </tr>
+            }
+
+            else
+            {
+                <tr class="FBodyTr">
+                <td class="FixTd">
+                @if ((topic.Closed == 0) && ((int)ViewData["FSectionClosed"] == 0) && ((int)ViewData["FSubsectionClosed"] == 0))
+                {
+                    <button><img src="/Content/images/Forum/Greenpencil.png" width="22" height="22"></button>
+                }
+                else
+                {
+                    <button><img src="/Content/images/Forum/Zamok.png" width="22" height="22"></button>
+                }
+                </td>
+                <td class="LowLinkTd">
+                @Html.ActionLink(topic.Name, "FMessages", "Forum", new
+                {
+                    topicId = topic.Id,
+                    subsectionId = (int)ViewData["FSubsectionId"],
+                    sectionId = (int)ViewData["FSectionId"]
+                }, new { @class = "SectionLink" })
+                </td>
+                <td class="Stat1"><center>@topic.NumViews</center></td>
+                <td class="Stat2"><center>@topic.NumFMsgs</center></td>
+                <td class="Stat3Date">
+                <center>
+                @if (topic.UserId != 0)
+                {
+                    @Html.ActionLink(topic.User.Login, "AnotherUserPage", "User", new { userId = topic.UserId }, new { @class = "UserLink" })
+                    <br />@topic.LastFMsgDate.ToString("dd MMM yy в HH:mm")
+                }
+                else
+                {
+                    <font>Нет</font>
+                }
+                </center>
+                </td>
+                </tr>
+            }
+              
+        }
+    }
+</table>
+
+
+<div class="Pager">
+    @Paging.GetPages(Html, (ItemPaging)Model, "SearchFTopicsPageBtn", "SearchFTopicsPageInput", page => Url.Action("FoundFTopicsChangePage", new { page = page }))
+</div>
+

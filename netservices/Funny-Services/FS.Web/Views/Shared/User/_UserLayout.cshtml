@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Title {
+    @RenderSection("Title", false)
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/Content/StylesUser.css" />
+}
+
+
+<section id="UserPage">
+    @RenderBody()
+</section>
+
+<footer id="Ffooter">
+    <a href="/Home/Index" class="FLink">Home</a>
+</footer>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/Jquery/jquery-ui/jquery-ui.min.js")
+    <script type="text/javascript" src="/Scripts/SitePages/User/UserScript.js"></script>
+    @RenderSection("Scripts", false)
+}

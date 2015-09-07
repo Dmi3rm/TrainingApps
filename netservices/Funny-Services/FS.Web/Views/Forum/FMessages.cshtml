@@ -1,0 +1,73 @@
+﻿@using FS.Web.Models;
+@using FS.Web.HelpClasses;
+
+@model FMsgPaging
+
+@{
+    Layout = "~/Views/Shared/Forum/_ForumLayout.cshtml";
+}
+
+@section Title {
+    NS Forum: Сообщения
+}
+
+@section FSearch {
+    <button data-ftopicId="@ViewData["FTopicId"]" onclick="Search(this)" id="SearchForumBtn"><img src="/Content/images/HomePage/Lupa.png" width="22" height="22" /></button>
+}
+
+@section FPlace {
+    <tr id="FPlace">
+        <td><center>@Html.ActionLink("<< Темы <<", "FTopics", "Forum", new { subsectionId = ViewBag.FSubsectionId, sectionId = ViewBag.FSectionId }, new { @class = "HeaderLink" })</center></td>
+        <td><center>@ViewData["FTopicName"]</center></td>
+        <td><center>&nbsp;</center></td>
+    </tr>
+}
+
+@if (Model.FMessages.Count > 0) { 
+    <div class="Pager">
+        @Paging.GetPages(Html, (ItemPaging)Model, "GoPageBtn", "GoPageInput", page => Url.Action("FMessages", new { currentPage = page, topicId = @ViewData["FTopicId"], subsectionId = ViewData["FSubsectionId"], sectionId = ViewData["FSectionId"] }))
+    </div>
+
+
+<section id="FMessages" data-sectionId="@ViewData["FSectionId"]" data-subsectionId="@ViewData["FSubsectionId"]" data-topicId="@ViewData["FTopicId"]">
+    @if (true)
+    {
+        foreach (FMessage fmessage in Model.FMessages)
+        {
+            Html.RenderPartial("Partials/FMessagePartial", fmessage, new ViewDataDictionary(ViewData));
+        }
+    }
+</section>
+
+
+    <div class="Pager">
+        @Paging.GetPages(Html, (ItemPaging)Model, "GoPageBtn", "GoPageInput", page => Url.Action("FMessages", new { currentPage = page, topicId = @ViewData["FTopicId"], subsectionId = ViewData["FSubsectionId"], sectionId = ViewData["FSectionId"] }))
+    </div>
+}
+else
+{
+    <section class="NoItemsSection">
+        <center>Сообщений пока нет</center>
+    </section>
+}
+    
+
+@if ((((int)ViewData["FSectionClosed"] == 0) && ((int)ViewData["FSubsectionClosed"] == 0) && ((int)ViewData["FTopicClosed"] == 0) && ((int)ViewData["Role"] != 0)) || ((int)ViewData["Role"] == 2))
+{
+    using (Html.BeginForm("NewFMessage", "Forum", new { topicId = ViewData["FTopicId"], subsectionId = ViewData["FSubsectionId"], sectionId = ViewData["FSectionId"] }, FormMethod.Post, null))
+    {
+        <textarea name="Text" id="NewMsgSide"></textarea>
+        <input type="submit" value="Отправить" id="SendMsgBtn"/>
+    }
+}
+
+
+<div id="EditMsgDialog">
+    <div class="DialogTitle" id="EditMsgDialogTitle">
+
+    </div>
+
+    <textarea id="MsgEditTextarea"></textarea>
+    <button class="NormalBtn" onclick="EditMsgOk()">Изменить</button>
+    <button class="NormalBtn" onclick="CloseEditMsgDialog()">Отмена</button>
+</div>

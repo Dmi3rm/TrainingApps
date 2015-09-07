@@ -1,0 +1,232 @@
+﻿html {width: 100%; height: 100%;}
+
+body { margin:0px; padding:0px; background:#6f8dff; width:100%; height:100%;}
+
+
+#Menu {
+    margin-left:1%;
+    height:100%; 
+    width:24%;
+    float:left;
+}
+
+
+#GraphField {
+    height:100%; 
+    width:75%;
+    float:left;
+}
+
+
+canvas {
+    background:white;
+    margin-top:0.8%;
+    margin-bottom:1%;
+    margin-right:1%;
+    margin-left:2%;
+    width:96%;
+    height:94%;
+    border:2px solid black;
+}
+
+
+#Header {
+    background:#33ff56;
+    margin-top:2.5%;
+    text-align:center;
+    width:100%;
+    display:block;
+    height:7%;
+}
+#headText {
+    text-align:center;
+    font-size:36px;
+    display:block;
+    width:100%;
+    height:100%;
+}
+
+#FuncGraph {
+    width:100%;
+    height:22%;
+    border-bottom:1px dashed black;
+}
+
+#FuncGraphHeadDiv {
+    width:100%;
+    margin-top:1%;
+    background:#33ff56;
+    height:17%;
+}
+
+#FuncGraphHeadFont {
+    display:block; float:left;
+    margin-top:2px;
+    margin-bottom:2px;
+    margin-left:5%;
+    height:80%;
+}
+
+#FuncGraphFunctions {
+    margin-left:2%;
+    margin-top:5px;
+    width:100%;
+    float:left;
+}
+
+#FuncGraphFunctions input {width:80%; margin-right:0px; margin-bottom:5px; }
+#FuncGraphFunctions label {width:10%;}
+
+#FuncGraphBtn {width:40%; float:right; margin-top:0px; }
+
+
+
+#EqGraph {
+    width:100%;
+    height:22%;
+    border-bottom:1px dashed black;
+}
+
+#EqGraphHeadDiv {
+    width:100%;
+    margin-top:2%;
+    background:#33ff56;
+}
+
+#EqGraphHeadFont {
+    margin-top:10%;
+    margin-bottom:10%;
+    margin-left:5%;
+    height:80%;
+}
+
+#EqGraphFunctions {
+    margin-left:2%;
+    margin-top:3%;
+    width:55%;
+    float:left;
+    
+    border-right:1px solid black;
+}
+
+#EqGraphFunctions input {width:70%; margin-right:0px; margin-bottom:3%;}
+#EqGraphFunctions label {width:10%;}
+
+#EqGraphValues {
+    margin-top:3%;
+    width:40%;
+    
+    float:left;
+}
+
+#EqGraphValues input {width: 60%; margin-bottom:3%;}
+#EqGraphValues label {width: 10%; margin-left:5%; margin-bottom:3%; }
+
+#EqRandomBtn {width:40%; float:left;  }
+#EqGraphBtn {width:40%; float:right; margin-top:1%; }
+
+#Clean {width:100%; height:5%; margin-top:1%; }
+
+
+
+#Parameters {width:100%; border-top:2px solid black; margin-top:2%; height:32%;}
+
+#ParametersFont {
+    display:block; 
+    float:left;
+    margin-top:2px;
+    margin-bottom:2px;
+    margin-left:5%;
+    width:25%;
+    height:80%;
+}
+
+#FieldParameters {
+    display:block;
+    text-decoration:none;
+    float:left;
+    border:1px solid black;
+    margin-left:5%;
+    width:30%;
+    border-radius:3px;
+}
+
+#GraphParameters {
+    display:block;
+    text-decoration:none;
+    float:left;
+    border:1px solid black;
+    width:30%;
+    border-radius:3px;
+    margin-left:1%;
+}
+
+#ParametersHeadDiv {
+    width:100%;
+    margin-top:1%;
+    background:#33ff56;
+    height:11%;
+}
+
+
+#FieldSettings {
+    width:100%;
+}
+
+#GraphSettings {
+    width:100%;
+}
+
+#FieldSettings tr {width:100%;}
+#GraphSettings tr {width:100%;}
+
+#FieldSettings td {
+    width:50%;
+    align-content:center;
+}
+#GraphSettings td {
+    width:50%;
+    align-content:center;
+}
+
+table tr td label {text-align:center;}
+
+#ScaleInput {
+    width:50%;
+}
+
+#CellInput {
+    width:50%;
+}
+
+#DiapasonInput {
+    width:50%;
+}
+
+#StepInput {
+    width:50%;
+}
+
+#ColorPicker {
+    width:50%;
+}
+
+#TurnOnGridBtn { width:70%;}
+#TurnOffGridBtn { width:70%; }
+
+button {
+    background:#d5d5d5;
+    border:1px solid black;
+}
+
+footer {
+    border-top:2px solid black;
+    width:100%;
+}
+
+#About {
+    color:black;
+    display:block;
+    width:33%;
+    margin-left:33%;
+}

@@ -1,0 +1,169 @@
+﻿@using FS.Web.Models;
+@model List<FS.Web.Models.FSubsection>
+
+@{
+    Layout = "~/Views/Shared/Forum/_ForumLayout.cshtml";
+}
+
+@section Title {
+    NS Forum: Секции
+}
+
+@section FSearch {
+    <button data-fsectionid="@ViewData["FSectionId"]" onclick="Search(this)" id="SearchForumBtn"><img src="/Content/images/HomePage/Lupa.png" width="22" height="22" /></button>
+}
+
+@section FPlace {
+    <tr>
+        <td><center>@Html.ActionLink("<< Разделы <<", "FSections", "Forum", null, new { @class = "HeaderLink" })</center></td>
+        <td><center>@ViewData["FSectionName"]</center></td>
+        @if (ViewBag.Role == 2)
+        {
+        <td><center>@Html.ActionLink("Новая секция", "NewFSubsection", "Forum", new { sectionId = ViewData["FSectionId"] }, new { @class = "HeaderLink" })</center></td>
+        }
+    </tr>
+}
+
+@if (Model.Count > 0) { 
+<table id="FItems" data-fsectionid="@ViewData["FSectionId"]" cellspacing="0">
+    <thead>
+        <tr id="FBodyHeadTr">
+            <td class="FixHTd"><center>&nbsp</center></td>
+            <td class="LowLinkHTd"><center><font>Название</font></center></td>
+            <td class="Stat1H"><center><font>Тем</font></center></td>
+            <td class="Stat2H"><center><font>Сообщений</font></center></td>
+            <td class="Stat3HDate"><center><font>Посл. Сообщ.</font></center></td>
+        </tr>
+    </thead>
+    <tbody>
+        @if ((int)ViewData["Role"] == 2)
+        {
+            foreach (FSubsection subsection in Model)
+            {
+                <tr class="FBodyTr" id="@subsection.Id">
+                    <td class="FixTd">
+                        @if ((subsection.Closed == 0) && ((int)ViewData["FSectionClosed"] == 0) )
+                        {
+                            <button id="lockBtn" onclick="Lock(this)" data-fsubsectionId="@subsection.Id"><img src="/Content/images/Forum/Greenpencil.png" width="22" height="22"></button>
+                        }
+                        else
+                        {
+                            <button id="unlockBtn" onclick="Lock(this)" data-fsubsectionid="@subsection.Id"><img src="/Content/images/Forum/Zamok.png" width="22" height="22"></button>
+                        }
+                    </td>
+                    <td class="AdminLowLinkTd">
+                        <table style="width:100%;">
+                            <tr style="width:100%;">
+                                <td class="AdminLowLinkTextTd">
+                                    @Html.ActionLink(subsection.Name, "FTopics", "Forum", new
+                           {
+                               subsectionId = subsection.Id,
+                               sectionId = ViewData["FSectionId"]
+                           }, new { @class = "SectionLink" })
+                                </td>
+                                <td class="AdminEditHandTd"><button data-fsubsectionid="@subsection.Id" data-name="@subsection.Name" onclick="EditItem(this)" class="AdminEditHandBtn"><img src="/Content/images/Forum/Hand.png" width="22" height="22"></button></td>
+                                <td class="AdminDeleteMusorTd"><button data-fsubsectionid="@subsection.Id" data-fsectionid="@ViewBag.FSectionId" data-name="@subsection.Name" onclick="DeleteItem(this)" class="AdminDeleteMusorBtn"><img src="/Content/images/Forum/Musor.png" width="22" height="22"></button></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="Stat1"><center>@subsection.NumFTopics</center></td>
+                    <td class="Stat2"><center>@subsection.NumFMsgs</center></td>
+                    <td class="Stat3Date">
+                    <center>
+                        @if (subsection.UserId != 0)
+                        { 
+                            @Html.ActionLink(subsection.User.Login, "AnotherUserPage", "User", new { userId = subsection.UserId }, new { @class = "UserLink" })
+                            <br/>@subsection.LastFMsgDate.ToString("dd MMM yy в HH:mm")
+                        }
+                        else
+                        {
+                            <font>Нет</font>
+                        }
+                    </center>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            foreach (FSubsection subsection in Model)
+            {
+                <tr class="FBodyTr" id="@subsection.Id">
+                    <td class="FixTd">
+                        @if ((subsection.Closed == 0) && ((int)ViewData["FSectionClosed"] == 0) )
+                        {
+                            <button><img src="/Content/images/Forum/Greenpencil.png" width="22" height="22"></button>
+                        }
+                        else
+                        {
+                            <button><img src="/Content/images/Forum/Zamok.png" width="22" height="22"></button>
+                        }
+                    </td>
+                    <td class="LowLinkTd">
+                        @Html.ActionLink(subsection.Name, "FTopics", "Forum", new
+               {
+                   subsectionId = subsection.Id,
+                   sectionId = ViewData["FSectionId"]
+               }, new { @class = "SectionLink" })
+                    </td>
+                    <td class="Stat1"><center>@subsection.NumFTopics</center></td>
+                    <td class="Stat2"><center>@subsection.NumFMsgs</center></td>
+                    <td class="Stat3Date">
+                    <center>
+                    @if (subsection.UserId != 0)
+                    {
+                        @Html.ActionLink(subsection.User.Login, "AnotherUserPage", "User", new { userId = subsection.UserId }, new { @class = "UserLink" })
+                        <br />@subsection.LastFMsgDate.ToString("dd MMM yy в HH:mm")
+                    }
+                    else
+                    {
+                        <font>Нет</font>
+                    }
+                    </center>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+}
+else
+{
+    <section class="NoItemsSection">
+        <center>Секций пока нет</center>
+    </section>
+}
+
+<div id="Dialog" class="Dialog">
+    <div id="DialogTitle" class="DialogTitle">
+
+    </div>
+
+    <button class="DialogBtn" id="RenameItemBtn" onclick="RenameItem()">Переименовать</button>
+    <button class="DialogBtn" id="ReplaceItemBtn" onclick="RememberItem()">Переместить</button>
+    @if ((int)ViewData["AllowInput"] == 1)
+    {
+        <button class="DialogBtn" id="InputItemBtn" onclick="InputItem()">Вставить</button>
+    }
+    else
+    {
+        <button class="InputNoItem" id="InputItemBtn">Вставить</button>
+    }
+</div>
+
+
+<div id="RenameDialog" class="Dialog">
+    <div id="RenameDialogTitle" class="DialogTitle">
+
+    </div>
+
+    <input id="RenameItemInput" maxlength="50" />
+    <button class="RenameFinallyBtn" onclick="RenameFinally()">Переименовать</button>
+</div>
+
+
+<div id="MsgDialog" class="Dialog">
+    <div id="MsgDialogTitle" class="DialogTitle">
+
+    </div>
+</div>

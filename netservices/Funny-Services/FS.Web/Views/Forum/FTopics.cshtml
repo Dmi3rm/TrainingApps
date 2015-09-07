@@ -1,0 +1,85 @@
+﻿@using FS.Web.Models;
+@using FS.Web.HelpClasses;
+@model FS.Web.Models.FTpcPaging
+
+@{
+    Layout = "~/Views/Shared/Forum/_ForumLayout.cshtml";
+}
+
+@section Title {
+    NS Forum: Темы
+}
+
+@section FSearch {
+    <button data-fsubsectionid="@ViewData["FSubsectionId"]" onclick="Search(this)" id="SearchForumBtn"><img src="/Content/images/HomePage/Lupa.png" width="22" height="22" /></button>
+}
+
+@section FPlace {
+            <tr>
+                <td><center>@Html.ActionLink("<< Секции <<", "FSubsections", "Forum", new { sectionId = ViewBag.FSectionId }, new { @class = "HeaderLink" })</center></td>
+                <td><center>@ViewData["FSubsectionName"]</center></td>
+                @if ((((int)ViewData["FSectionClosed"] == 0) && ((int)ViewData["FSubsectionClosed"] == 0) && ((int)ViewData["Role"] != 0)) || ((int)ViewData["Role"] == 2) )
+                { 
+                <td><center>@Html.ActionLink("Новая тема", "NewFTopic", "Forum", new { subsectionId = @ViewData["FSubsectionId"], sectionId = ViewData["FSectionId"] }, new { @class = "HeaderLink" })</center></td>
+                }
+            </tr>
+}
+
+@if (Model.FTopics.Count > 0) { 
+<div class="Pager">
+    @Paging.GetPages(Html, (ItemPaging)Model, "GoPageBtn", "GoPageInput", page => Url.Action("FTopics", new { currentPage = page, subsectionId = ViewData["FSubsectionId"], sectionId = ViewData["FSectionId"] }))
+</div>
+
+<table id="FTopics" cellspacing="0" data-sectionId="@ViewData["FSectionId"]" data-subsectionId="@ViewData["FSubsectionId"]">
+    <tr id="FBodyHeadTr">
+        <td class="FixHTd"><center>&nbsp</center></td>
+        <td class="LowLinkHTd"><center><font>Название</font></center></td>
+        <td class="Stat1H"><center><font>Просмотров</font></center></td>
+        <td class="Stat2H"><center><font>Сообщений</font></center></td>
+        <td class="Stat3HDate"><center><font>Посл. Сообщ.</font></center></td>
+    </tr>
+    @foreach (FTopic topic in Model.FTopics)
+    {
+        Html.RenderPartial("Partials/FTopicPartial", topic);
+    }
+    
+
+</table>
+
+<div class="Pager">
+    @Paging.GetPages(Html, (ItemPaging)Model, "GoPageBtn", "GoPageInput", page => Url.Action("FTopics", new { currentPage = page, subsectionId = ViewData["FSubsectionId"], sectionId = ViewData["FSectionId"] }))
+</div>
+}
+else
+{
+    <section class="NoItemsSection">
+        <center>Тем пока нет</center>
+    </section>
+}
+
+<div id="Dialog" class="Dialog">
+    <div id="DialogTitle" class="DialogTitle">
+
+    </div>
+
+    <button class="DialogBtn" id="FixTopicBtn" onclick="FixTopic()"></button>
+    <button class="DialogBtn" id="RenameItemBtn" onclick="RenameItem()">Переименовать</button>
+    <button class="DialogBtn" id="ReplaceItemBtn" onclick="RememberItem()">Переместить</button>
+</div>
+
+
+<div id="RenameDialog" class="Dialog">
+    <div id="RenameDialogTitle" class="DialogTitle">
+
+    </div>
+
+    <input id="RenameItemInput" maxlength="50" />
+    <button class="RenameFinallyBtn" onclick="RenameFinally()">Переименовать</button>
+</div>
+
+
+<div id="MsgDialog" class="Dialog">
+    <div id="MsgDialogTitle" class="DialogTitle">
+
+    </div>
+</div>

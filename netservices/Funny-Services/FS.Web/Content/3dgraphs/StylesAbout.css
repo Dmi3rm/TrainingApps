@@ -1,0 +1,74 @@
+/* Simple reset */
+
+.modalDialog {
+position: fixed;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+background: rgba(0,0,0,0.8);
+z-index: 99990;
+opacity: 0;
+-webkit-transition: opacity 400ms ease-in;
+transition: opacity 400ms ease-in;
+pointer-events: none;
+}
+
+#dral {
+resize: both;
+overflow: hidden;
+position: absolute;
+left: 0;
+top: 0;
+/* настройка ширины и высоты окна */
+
+min-width: 60%;
+min-height: 40%;
+}
+
+/* затемнение*/
+.modalDialog:target {
+opacity: 1;
+pointer-events: auto;
+}
+
+/* заголовок */
+h3 {
+text-align: center;
+color: rgb(109, 132, 180);
+}
+
+
+.modalDialog > #dral {
+width: 400px;
+position: relative;
+margin: 10% auto;
+border-radius: 4px;
+border-bottom-right-radius:0;
+background: #fff;
+background: -webkit-linear-gradient(#fff, #999);
+border: 6px solid rgba(109, 132, 180, .5);
+background-clip: padding-box;
+}
+/* сontent */
+.dlgContent {
+margin: 16px 12px;
+padding-top: 10px;
+}
+/* Close Button */
+.close {
+position: absolute;
+background: red;
+line-height: 25px;
+top: 0px;
+right: 4px;
+width: 42px;
+text-decoration: none;
+text-align: center;
+color: white;
+font-weight: bold;
+z-index: 99999;
+}
+.close:hover {
+background: #8B0000;
+}

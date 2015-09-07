@@ -1,0 +1,111 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/Content/StylesAdmin.css" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/AdminScript.js")
+}
+
+<h3>
+    Site Settings
+</h3>
+
+<header>
+    <div>@Html.ActionLink("Home", "Index", "Home")</div>
+</header>
+
+<section id="LinksPlace">
+
+    <table class="InvTable" id="NewsTable">
+        <tr><th> </th></tr>
+        <tr><td><a href="#"> </a></td></tr>
+        <tr><td><a href="#"> </a></td></tr>
+        <tr><td><a href="#"> </a></td></tr>
+    </table>
+
+    <table class="FuncTable" id="NewsTable">
+        <tr><th>News</th></tr>
+        <tr><td><a href="/Admin/AddSNovelty">Add</a></td></tr>
+        <tr><td><a href="/Admin/SNoveltysEditPage">Edit</a></td></tr>
+        <tr><td><a href="/Admin/RemoveOldSNovelties">Delete</a></td></tr>
+    </table>
+
+    <table class="InvTable" id="NewsTable">
+        <tr><th> </th></tr>
+        <tr><td><a href="#"> </a></td></tr>
+        <tr><td><a href="#"> </a></td></tr>
+        <tr><td><a href="#"> </a></td></tr>
+    </table>
+
+    <table class="FuncTable" id="UsersTable">
+        <tr><th>Users</th></tr>
+        <tr><td><a href="/Admin/UsersEditList">Пользователи</a></td></tr>
+    </table>
+
+    <table class="InvTable" id="NewsTable">
+        <tr><th> </th></tr>
+        <tr><td><a href="#"> </a></td></tr>
+        <tr><td><a href="#"> </a></td></tr>
+        <tr><td><a href="#"> </a></td></tr>
+    </table>
+
+    <table class="FuncTable" id="SPicturesTable">
+        <tr><th>Site Pictures</th></tr>
+        <tr><td><a href="/Admin/AddSPicture">Add</a></td></tr>
+        <tr><td><a href="/Admin/SPicturesEditPage">Edit</a></td></tr>
+        <tr><td><a href="/Admin/SPicturesEditPage">Delete</a></td></tr>
+    </table>
+
+    <table class="InvTable" id="NewsTable">
+        <tr><th> </th></tr>
+        <tr><td><a href="#"> </a></td></tr>
+        <tr><td><a href="#"> </a></td></tr>
+        <tr><td><a href="#"> </a></td></tr>
+    </table>
+
+    <table class="FuncTable" id="SSongsTable">
+        <tr><th>Site Songs</th></tr>
+        <tr><td><a href="/Admin/AddSSong">Add</a></td></tr>
+        <tr><td><a href="/Admin/SSongsEditPage">Edit</a></td></tr>
+        <tr><td><a href="/Admin/SSongsEditPage">Delete</a></td></tr>
+    </table>
+
+    <table class="InvTable" id="NewsTable">
+        <tr><th> </th></tr>
+        <tr><td><a href="#"> </a></td></tr>
+        <tr><td><a href="#"> </a></td></tr>
+        <tr><td><a href="#"> </a></td></tr>
+    </table>
+
+    <table class="FuncTable" id="SVideosTable">
+        <tr><th>Site Videos</th></tr>
+        <tr><td><a href="/Admin/AddSVideo">Add</a></td></tr>
+        <tr><td><a href="/Admin/SVideosEditPage">Edit</a></td></tr>
+        <tr><td><a href="/Admin/SVideosEditPage">Delete</a></td></tr>
+    </table>
+
+    <table class="InvTable" id="NewsTable">
+        <tr><th> </th></tr>
+        <tr><td><a href="#"> </a></td></tr>
+        <tr><td><a href="#"> </a></td></tr>
+        <tr><td><a href="#"> </a></td></tr>
+    </table>
+
+    <table class="FuncTable" id="FilesTable">
+        <tr><th>Files</th></tr>
+        <tr><td><input type="button" value="Open File Manager" onclick="OpenFileMngr();" /></td></tr>
+
+    </table>
+
+</section>
+
+<script type="text/javascript">
+    function OpenFileMngr() {
+        var mngrWnd = window.open("/Scripts/Filemanager-master/index.html", "File Manager",
+            'location=no,toolbar=no,menubar=no,directories=no,status=no,resizable=yes,scrollbars=yes,height=600,width=750, false');
+    };
+</script>

@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@RenderSection("Title", false)</title>
+    @RenderSection("Css", false)
+</head>
+<body>
+    
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/Jquery/jquery-1.10.2.min.js")
+    @Scripts.Render("~/Scripts/Jquery/jquery.unobtrusive-ajax.min.js")
+    @RenderSection("Scripts", false)
+</body>
+</html>

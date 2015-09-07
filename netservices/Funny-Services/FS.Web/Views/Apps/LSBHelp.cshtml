@@ -1,0 +1,64 @@
+﻿<html>
+<head>
+    <title>ЛС Справка</title>
+</head>
+<body>
+    <section id="HHeader">
+        <a href="/Apps/LogicSchemeBuilder" class="LinkBack">x</a>
+        <center>Руководство</center>
+    </section>
+
+    <section id="HBody">
+        &nbsp&nbsp&nbsp&nbsp Программа позволяет строить логические схемы и следить за их выполнением. Поддерживается 3 типа логических элементов: И, ИЛИ и НЕ.
+        Чтобы добавить элемент на поле, кликните на него на панели ELEMENTS, а затем еще раз в нужном месте экрана. Чтобы изменить текущую логическую
+        схему (кроме добавления) щелкните кноку Edit >> Change. Теперь вы можете двигать элемент, менять значения на входе, а так же создавать новые
+        связи итд.<br/><br/>
+        &nbsp&nbsp&nbsp&nbsp - Перемещение элемента: зажать левую клавишу мыши на его цетре >> не отпуская перетащить его в нужное место поля <br />
+        &nbsp&nbsp&nbsp&nbsp - Удаление элемента: перетащить его на крест <br />
+        &nbsp&nbsp&nbsp&nbsp - Изменение значения на входе: щелчек на ?, 0 или 1 <br />
+        &nbsp&nbsp&nbsp&nbsp - Создание связи: зажать левую клавишу мыши на выходе, перетащить на вход и отпустить (линия закрепится) <br />
+        &nbsp&nbsp&nbsp&nbsp - Удаление связи: кликнуть по соответствующей линии <br /><br />
+        &nbsp&nbsp&nbsp&nbsp Полное и пошаговое выполнения приложения, а также откат до первоначальных значений доступны при помощи соответсвующих 
+        кнопок на панели APPLICATION. <br />
+        &nbsp&nbsp&nbsp&nbsp Изменить размер логических элементов можно нажав на scale >> small, middle и large.
+    </section>
+</body>
+</html>
+
+
+<style>
+    html {width:100%; height:100%; margin:0; padding:0;}
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: #F4FF96;
+    }
+
+    #HHeader {
+        background: #22D12B;
+        width: 98%;
+        margin-left: 1%;
+        margin-right: 1%;
+        height: 22px;
+        border: 1px solid black;
+    }
+
+    #HBody {
+        padding-left:150px;
+        padding-right:150px;
+        margin-top:100px;;
+    }
+
+    .LinkBack {
+        float:right;
+        border:1px solid black;
+        font-size:18px;
+        padding-left:5px;
+        padding-right:5px;
+        text-decoration:none;
+        color:black;
+        background:red;
+    }
+</style>

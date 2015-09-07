@@ -1,0 +1,26 @@
+﻿@using FS.Web.Models
+@model SSong
+
+@using (Html.BeginForm("EditSSong", "Admin", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    <div style="margin-top:15px;">
+        @if (Model.SongData == null)
+{
+
+}
+else
+{
+    <audio controls><source src="@Url.Action("son", "Home", new { name = Model.Name })" /></audio>
+}
+        <div>
+            Upload new song:
+            <input type="file" name="Song" />
+        </div>
+    </div>
+
+    <div style="display:none;">@Html.EditorFor(m => m.Id)</div>
+    @Html.LabelFor(m => m.Name)
+    @Html.TextBoxFor(m => m.Name, new { maxlength = "50" })
+
+    <input type="submit" value="Save" />
+}

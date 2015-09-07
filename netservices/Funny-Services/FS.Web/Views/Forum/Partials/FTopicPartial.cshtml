@@ -1,0 +1,87 @@
+﻿@model FS.Web.Models.FTopic
+
+@if ((int)ViewData["Role"] == 2)
+{ 
+<tr class="FBodyTr">
+    <td class="FixTd">
+        @if ((Model.Closed == 0) && ((int)ViewData["FSectionClosed"] == 0) && ((int)ViewData["FSubsectionClosed"] == 0))
+        {
+            <button id="lockBtn" onclick="Lock(this)" data-ftopicid="@Model.Id"><img src="/Content/images/Forum/Greenpencil.png" width="22" height="22"></button>
+        }
+        else
+        {
+            <button id="unlockBtn" onclick="Lock(this)" data-ftopicid="@Model.Id"><img src="/Content/images/Forum/Zamok.png" width="22" height="22"></button>
+        }
+    </td>
+    <td class="AdminLowLinkTd">
+        <table>
+            <tr>
+                <td class="AdminLowLinkTextTd">
+                    @Html.ActionLink(Model.Name, "FMessages", "Forum", new
+                       {
+                           topicId = Model.Id,
+                           subsectionId = (int)ViewData["FSubsectionId"],
+                           sectionId = (int)ViewData["FSectionId"]
+                       }, new { @class = "SectionLink" })
+                </td>
+                <td class="AdminEditHandTd"><button data-fix="@Model.Fix" data-ftopicid="@Model.Id" data-name="@Model.Name" onclick="EditItem(this)" class="AdminEditHandBtn"><img src="/Content/images/Forum/Hand.png" width="22" height="22"></button></td>
+                <td class="AdminDeleteMusorTd"><button data-ftopicid="@Model.Id" data-fsubsectionid="@ViewData["FSubsectionId"]" data-fsectionid="@ViewData["FSectionId"]" data-name="@Model.Name" onclick="DeleteItem(this)" class="AdminDeleteMusorBtn"><img src="/Content/images/Forum/Musor.png" width="22" height="22"></button></td>
+            </tr>
+        </table>
+    </td>
+    <td class="Stat1"><center>@Model.NumViews</center></td>
+    <td class="Stat2"><center>@Model.NumFMsgs</center></td>
+    <td class="Stat3Date">
+        <center>
+            @if (Model.UserId != 0)
+            {
+                @Html.ActionLink(Model.User.Login, "AnotherUserPage", "User", new { userId = Model.UserId }, new { @class = "UserLink" })
+                <br />@Model.LastFMsgDate.ToString("dd MMM yy в HH:mm")
+            }
+            else
+            {
+                <font>Нет</font>
+            }
+        </center>
+    </td>
+</tr>
+}
+
+else
+{
+    <tr class="FBodyTr">
+    <td class="FixTd">
+        @if ((Model.Closed == 0) && ((int)ViewData["FSectionClosed"] == 0) && ((int)ViewData["FSubsectionClosed"] == 0))
+        {
+            <button><img src="/Content/images/Forum/Greenpencil.png" width="22" height="22"></button>
+        }
+        else
+        {
+            <button><img src="/Content/images/Forum/Zamok.png" width="22" height="22"></button>
+        }
+    </td>
+    <td class="LowLinkTd">
+        @Html.ActionLink(Model.Name, "FMessages", "Forum", new
+           {
+               topicId = Model.Id,
+               subsectionId = (int)ViewData["FSubsectionId"],
+               sectionId = (int)ViewData["FSectionId"]
+           }, new { @class = "SectionLink" })
+    </td>
+    <td class="Stat1"><center>@Model.NumViews</center></td>
+    <td class="Stat2"><center>@Model.NumFMsgs</center></td>
+    <td class="Stat3Date">
+        <center>
+            @if (Model.UserId != 0)
+            {
+                @Html.ActionLink(Model.User.Login, "AnotherUserPage", "User", new { userId = Model.UserId }, new { @class = "UserLink" })
+                <br />@Model.LastFMsgDate.ToString("dd MMM yy в HH:mm")
+            }
+            else
+            {
+                <font>Нет</font>
+            }
+        </center>
+    </td>
+</tr>
+}

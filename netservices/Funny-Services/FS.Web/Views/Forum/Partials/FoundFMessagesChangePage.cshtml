@@ -1,0 +1,101 @@
+﻿@using FS.Web.HelpClasses;
+@using FS.Web.Models;
+@model FoundFMsgPaging
+
+
+<div class="Pager">
+    @Paging.GetPages(Html, (ItemPaging)Model, "SearchFMessagesPageBtn", "SearchFMessagesPageInput", page => Url.Action("FoundFMessagesChangePage", new { page = page }))
+</div>
+
+<section style="border-bottom:2px solid orange">
+    @if (true)
+    {
+        KeyValuePair<string, object> FSectionKey = new KeyValuePair<string, object>("FSectionId", 0);
+        KeyValuePair<string, object> FSubsectionKey = new KeyValuePair<string, object>("FSubsectionId", 0);
+        KeyValuePair<string, object> FTopicKey = new KeyValuePair<string, object>("FTopicId", 0);
+        ViewData.Add(FSectionKey);
+        ViewData.Add(FSubsectionKey);
+        ViewData.Add(FTopicKey);
+        foreach (FoundFMessage foundFMessage in Model.FoundFMessages)
+        {
+            FMessage fmessage = foundFMessage.FMessage;
+            ViewData["FSectionId"] = foundFMessage.FSection.Id;
+            ViewData["FSubsectionId"] = foundFMessage.FSubsection.Id;
+            ViewData["FTopicId"] = foundFMessage.FTopic.Id;
+
+
+
+            <div style="text-align:center; background-color:orange;">
+                @Html.ActionLink(foundFMessage.FSection.Name, "FSubsections", "Forum", new { sectionId = foundFMessage.FSection.Id },
+                                    new { @class = "SectionLink", @style = "display:inline;" }) >>
+                @Html.ActionLink(foundFMessage.FSubsection.Name, "FTopics", "Forum", new
+                           {
+                               subsectionId = foundFMessage.FSubsection.Id,
+                               sectionId = foundFMessage.FSection.Id
+                           }, new { @class = "SectionLink", @style = "display:inline;" }) >>
+                @Html.ActionLink(foundFMessage.FTopic.Name, "FMessages", "Forum", new
+                    {
+                        topicId = foundFMessage.FTopic.Id,
+                        subsectionId = foundFMessage.FSubsection.Id,
+                        sectionId = foundFMessage.FSection.Id
+                    }, new { @class = "SectionLink", @style = "display:inline;" })
+            </div>
+
+
+
+
+            if ((int)ViewData["Role"] == 2)
+            {
+                <div class="DivMsg" style="background:#e9f3e9;">
+                    <button onclick="DeleteMsg(this)" class="DeleteMsgBtn" style="float: right; border: 0; background: #e9f3e9;" data-fmessageid="@fmessage.Id" data-fsectionid="@ViewData["FSectionId"]" data-fsubsectionid="@ViewData["FSubsectionId"]" data-ftopicid="@ViewData["FTopicId"]"><img src="/Content/images/Forum/Musor.png" width="22" height="22"></button>
+                    <button onclick="EditMsg(this)" class="DeleteMsgBtn" style="float: right; border: 0; background: #e9f3e9;" data-fmessageid="@fmessage.Id" data-><img src="/Content/images/Forum/Hand.png" width="22" height="22"></button>
+                    <img class="MsgUserAva" src="@Url.Action("GetImageByUserId", "User", new { userId = fmessage.UserId })" />
+
+                    @Html.ActionLink(fmessage.User.Login, "AnotherUserPage", "User", new { userId = fmessage.UserId }, new { @class = "UserLink" })
+                    @fmessage.WriteDate.ToString("dd MMM yy в HH:mm")
+                    <br />
+                    @if (Membership.GetUser(fmessage.User.Login).IsOnline == true)
+                    {
+                        <font>Online</font>
+                    }
+                    else
+                    {
+                        <font>Offline</font>
+                    }
+                    <br />
+                    @fmessage.Text
+                </div>
+            }
+            else
+            {
+                <div class="DivMsg" style="background:#e9f3e9;">
+                    @if (fmessage.User.Login == User.Identity.Name)
+                    {
+                        <button onclick="DeleteMsg(this)" class="DeleteMsgBtn" style="float: right; border: 0; background: #e9f3e9;" data-fmessageid="@fmessage.Id" data-fsectionid="@ViewData["FSectionId"]" data-fsubsectionid="@ViewData["FSubsectionId"]" data-ftopicid="@ViewData["FTopicId"]"><img src="/Content/images/Forum/Musor.png" width="22" height="22"></button>
+                        <button onclick="EditMsg(this)" class="DeleteMsgBtn" style="float: right; border: 0; background: #e9f3e9;" data-fmessageid="@fmessage.Id"><img src="/Content/images/Forum/Hand.png" width="22" height="22"></button>
+                    }
+                    <img class="MsgUserAva" src="@Url.Action("GetImageByUserId", "User", new { userId = fmessage.UserId })" />
+
+                    @Html.ActionLink(fmessage.User.Login, "AnotherUserPage", "User", new { userId = fmessage.UserId }, new { @class = "UserLink" })
+                    @fmessage.WriteDate.ToString("dd MMM yy в HH:mm")
+                    <br />
+                    @if (Membership.GetUser(fmessage.User.Login).IsOnline == true)
+                    {
+                        <font>Online</font>
+                    }
+                    else
+                    {
+                        <font>Offline</font>
+                    }
+
+                    <br />
+                    @fmessage.Text
+                </div>
+            }
+        }
+    }
+</section>
+
+<div class="Pager">
+    @Paging.GetPages(Html, (ItemPaging)Model, "SearchFMessagesPageBtn", "SearchFMessagesPageInput", page => Url.Action("FoundFMessagesChangePage", new { page = page }))
+</div>

@@ -1,0 +1,14 @@
+﻿@using FS.Web.Models;
+@model User
+
+    
+    <h4 id="hAuth">@Model.Login</h4>
+    
+    <div>
+            <img class="HomeAva" src="@Url.Action("GetImage", "User")" />
+    </div>
+
+
+    @Html.ActionLink("Профиль", "UserPage", "User", new { }, new { @class = "HomeProfileLink" })
+
+    @Html.ActionLink("Выйти", "LogOff", "Account", new { }, new { @class = "HomeLogoutLink" })

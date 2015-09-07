@@ -1,0 +1,152 @@
+﻿@using FS.Web.Models.Home;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Title {
+    Net Services
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/Content/StylesHome.css" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/Jquery/jquery-ui/jquery-ui.min.js")
+    @Scripts.Render("~/Scripts/SitePages/Home/HomeScript.js")
+}
+
+
+<section id="header">
+    <div id="redtop">
+        
+    </div>
+
+    <div id="invistop">
+
+    </div>
+
+    <div id="fscom">
+        
+    </div>
+
+    <div id="fullname">
+        <table id="CenterHeaderTable">
+            <tr>
+                <td style="text-align:center;">
+                    <font style=" font-family:Forte; font-size:70px;">Net Services</font>
+                </td>
+            </tr>
+        </table>
+        <table id="RightHeaderTable">
+            <tr>
+                <td>
+                    <font>@DateTime.Now.ToString("dddd"),</font><br />
+                    <font>@DateTime.Now.ToString("dd:MM:yyyy")</font>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<section id="mainMenu">
+    <ul>
+        <li>
+            <a href="#">Игры</a>
+            <ul>
+                <li><a href="/Apps/WorldWar5">World War 5</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#">Приложения</a>
+            <ul>
+                <li><a href="/Apps/Graphs">3D Графики</a></li>
+                <li><a href="/Apps/LogicSchemeBuilder">Логические схемы</a></li>
+            </ul>
+        </li>
+
+        <li>
+            @Html.ActionLink("Форум", "FSections", "Forum")
+            <ul></ul>
+        </li>
+
+        <li>
+            <a href="#" class="InactiveLink">Чат</a>
+            <ul></ul>
+        </li>
+
+        <li>
+            <a href="#" class="InactiveLink">Картинки</a>
+            <ul></ul>
+        </li>
+
+        <li>
+            <a href="#" class="InactiveLink">Видео/Фильмы</a>
+        </li>
+
+        <li>
+            <a href="#" class="InactiveLink">Статейки</a>
+        </li>
+    </ul>
+</section>
+
+<section id="posts">
+    <table id="NewsHeaderTable">
+        <tr id="NewsHeaderTr">
+            <td id="LeftNothingPlace">&nbsp</td>
+            <td id="GreetingsPlace">
+                <button id="GreetingsBtn">Стартовая</button>
+            </td>
+            <td id="NovationsPlace">
+                <button id="NovationsBtn">Обновления</button>
+            </td>
+            <td id="NotesPlace">
+                <button id="NotesBtn">Заметки</button>
+            </td>
+            <td id="RightNothingPlace"></td>
+        </tr>
+    </table>
+
+        <section id="news"></section>
+</section>
+
+<section id="userMenu">
+    @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+{
+        <div id="QuickUserDataContainer">
+            <button id="btnQuickUserData" value="ShowPage" style="visibility:hidden;">My Data</button>
+        </div>
+        
+        @Ajax.ActionLink("Account", "QuickUserData", "User",  new { },
+                      new AjaxOptions { UpdateTargetId = "QuickUserDataContainer" },
+                new { @id = "QuickUserDataButton", @style="visibility:hidden;"})
+}
+    else
+    {
+            <h4 id="hAuth">Авторизация</h4>
+            <button id="btnLogin" value="Войти" >Вход</button>
+            <button id="btnReg" value="Войти" >Регистрация</button>
+        
+        
+            <div id="AuthContainer">
+                
+            </div>
+        
+            
+        
+            @Ajax.ActionLink("Account", "Login", new { },
+                 new AjaxOptions { UpdateTargetId = "AuthContainer", OnFailure = "LoginOnFailure" },
+                new { @id = "LoginButton", @style="visibility:hidden;"})
+        
+            @Ajax.ActionLink("Account", "Register", new { },
+                 new AjaxOptions { UpdateTargetId = "AuthContainer", OnFailure = "LoginOnFailure" },
+                new { @id = "RegisterButton", @style="visibility:hidden;"})
+    }
+</section>
+            
+
+<footer id="HFooter">
+    <center><b>netsrvcs@mail.ru</b></center>
+</footer>

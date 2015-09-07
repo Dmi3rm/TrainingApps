@@ -1,0 +1,51 @@
+﻿@model FS.Web.Models.FMessage
+
+
+@if((int)ViewData["Role"] == 2)
+{ 
+<div class="DivMsg">
+    <button onclick="DeleteMsg(this)" class="DeleteMsgBtn" data-fmessageid="@Model.Id" data-fsectionid="@ViewData["FSectionId"]" data-fsubsectionid="@ViewData["FSubsectionId"]" data-ftopicid="@ViewData["FTopicId"]"><img src="/Content/images/Forum/Musor.png" width="22" height="22"></button>
+    <button onclick="EditMsg(this)" class="DeleteMsgBtn" data-fmessageid="@Model.Id" data-><img src="/Content/images/Forum/Hand.png" width="22" height="22"></button>
+    <img class="MsgUserAva" src="@Url.Action("GetImageByUserId", "User", new { userId = Model.UserId })" />
+
+    @Html.ActionLink(Model.User.Login, "AnotherUserPage", "User", new { userId = Model.UserId }, new { @class = "UserLink" })
+    @Model.WriteDate.ToString("dd MMM yy в HH:mm")
+    <br />
+    @if (Membership.GetUser(Model.User.Login).IsOnline == true)
+    {
+        <font>Online</font>
+    }
+    else
+    {
+        <font>Offline</font>
+    }
+    <br />
+    @Model.Text
+</div>
+}
+else
+{
+    <div class="DivMsg">
+    @if (Model.User.Login == User.Identity.Name)
+    {
+        <button onclick="DeleteMsg(this)" class="DeleteMsgBtn" data-fmessageid="@Model.Id" data-fsectionid="@ViewData["FSectionId"]" data-fsubsectionid="@ViewData["FSubsectionId"]" data-ftopicid="@ViewData["FTopicId"]"><img src="/Content/images/Forum/Musor.png" width="22" height="22"></button>
+        <button onclick="EditMsg(this)" class="DeleteMsgBtn" data-fmessageid="@Model.Id"><img src="/Content/images/Forum/Hand.png" width="22" height="22"></button>
+    }
+    <img class="MsgUserAva" src="@Url.Action("GetImageByUserId", "User", new { userId = Model.UserId })" />
+
+    @Html.ActionLink(Model.User.Login, "AnotherUserPage", "User", new { userId = Model.UserId }, new { @class = "UserLink" })
+    @Model.WriteDate.ToString("dd MMM yy в HH:mm")
+    <br />
+    @if (Membership.GetUser(Model.User.Login).IsOnline == true)
+    {
+        <font>Online</font>
+    }
+    else
+    {
+        <font>Offline</font>
+    }
+
+    <br />
+    @Model.Text
+</div>
+}

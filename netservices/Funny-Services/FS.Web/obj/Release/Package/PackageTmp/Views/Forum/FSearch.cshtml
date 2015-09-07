@@ -1,0 +1,169 @@
+﻿@using FS.Web.Models;
+@using FS.Web.HelpClasses;
+@model FS.Web.Models.SearchView
+
+@{
+    Layout = "~/Views/Shared/Forum/_ForumLayout.cshtml";
+}
+
+@section Title {
+    NS Forum: Поиск
+}
+
+@section FSearch {
+    <button onclick="Search(this)" id="SearchForumBtn"><img src="/Content/images/HomePage/Lupa.png" width="22" height="22" /></button>
+}
+
+@section FPlace {
+    <tr>
+        <td><center><a href="@Model.LinkBackHref" class="HeaderLink">@Model.LinkBackText</a></center></td>
+        <td id="SearchHeader"><center>Поиск @Model.Ask @Model.PlaceType @Model.PlaceName</center></td>
+        <td><center>&nbsp</center></td>
+    </tr>
+}
+
+
+
+<section id="SearchSection">
+@if (Model.PlaceType != "в теме")
+{
+    <div id="SearchTopicsHeader"><font class="SearchItemsText">Темы</font><button class="ShowFoundBtn" onclick="ShowFoundTopics(this)">Свернуть</button></div>
+     
+    if (Model.FoundFTpcPaging.FoundFTopics.Count > 0)
+    { 
+    <div id="FoundTopicsPlace" style="display:block;">
+        <div class="Pager">
+            @Paging.GetPages(Html, (ItemPaging)Model.FoundFTpcPaging, "SearchFTopicsPageBtn", "SearchFTopicsPageInput", page => Url.Action("FoundFTopicsChangePage", new { page = page }))
+        </div>
+
+        <table id="FTopics" cellspacing="0">
+            <tr id="FBodyHeadTr">
+                <td class="FixHTd"><center>&nbsp</center></td>
+                <td class="LowLinkHTd"><center><font>Название</font></center></td>
+                <td class="Stat1H"><center><font>Просмотров</font></center></td>
+                <td class="Stat2H"><center><font>Сообщений</font></center></td>
+                <td class="Stat3HDate"><center><font>Посл. Сообщ.</font></center></td>
+            </tr>
+
+            @if ( 1 == 1 )
+            {
+                KeyValuePair<string, object> FSectionKey = new KeyValuePair<string, object>("FSectionId", 0);
+                KeyValuePair<string, object> FSubsectionKey = new KeyValuePair<string, object>("FSubsectionId", 0);
+                KeyValuePair<string, object> FSKey1 = new KeyValuePair<string, object>("FSectionClosed", 0);
+                KeyValuePair<string, object> FSKey2 = new KeyValuePair<string, object>("FSubsectionClosed", 0);
+                ViewData.Add(FSectionKey);
+                ViewData.Add(FSubsectionKey);
+                ViewData.Add(FSKey1);
+                ViewData.Add(FSKey2);
+                foreach (FoundFTopic foundFTopic in Model.FoundFTpcPaging.FoundFTopics)
+                {
+                    FTopic topic = foundFTopic.FTopic;
+                    ViewData["FSectionId"] = foundFTopic.FSection.Id;
+                    ViewData["FSubsectionId"] = topic.FSubsectionId;
+                    ViewData["FSectionClosed"] = foundFTopic.FSection.Closed;
+                    ViewData["FSubsectionClosed"] = foundFTopic.FSubsection.Closed;
+                    Html.RenderPartial("Partials/FTopicPartial", topic, new ViewDataDictionary(ViewData));
+                }
+            }
+        </table>
+        <div style="display:none;">@ViewData.Remove("FSectionId")@ViewData.Remove("FSubsectionId")</div>
+        <div class="Pager">
+            @Paging.GetPages(Html, (ItemPaging)Model.FoundFTpcPaging, "SearchFTopicsPageBtn", "SearchFTopicsPageInput", page => Url.Action("FoundFTopicsChangePage", new { page = page }))
+        </div>
+
+    </div>
+    }
+    else
+    {
+        <div id="FoundTopicsPlace" style="display:block;"><font>Тем не найдено</font></div>
+    }
+}
+
+    <div id="SearchMessagesHeader"><font class="SearchItemsText">Посты</font><button class="ShowFoundBtn" onclick="ShowFoundMessages(this)">Свернуть</button></div>
+
+    @if(Model.FoundFMsgPaging.FoundFMessages.Count > 0)
+    {
+    <div id="FoundMessagesPlace" style="display:block; width:100%;">
+
+
+        <div class="Pager">
+            @Paging.GetPages(Html, (ItemPaging)Model.FoundFMsgPaging, "SearchFMessagesPageBtn", "SearchFMessagesPageInput", page => Url.Action("FoundFMessagesChangePage", new { page = page }))
+        </div>
+
+
+        <section id="FMessages">
+            @if (1 == 1)
+            {
+                KeyValuePair<string, object> FSectionKey = new KeyValuePair<string, object>("FSectionId", 0);
+                KeyValuePair<string, object> FSubsectionKey = new KeyValuePair<string, object>("FSubsectionId", 0);
+                KeyValuePair<string, object> FTopicKey = new KeyValuePair<string, object>("FTopicId", 0);
+                ViewData.Add(FSectionKey);
+                ViewData.Add(FSubsectionKey);
+                ViewData.Add(FTopicKey);
+                foreach (FoundFMessage foundFMessage in Model.FoundFMsgPaging.FoundFMessages)
+                {
+                    FMessage fmessage = foundFMessage.FMessage;
+                    ViewData["FSectionId"] = foundFMessage.FSection.Id;
+                    ViewData["FSubsectionId"] = foundFMessage.FSubsection.Id;
+                    ViewData["FTopicId"] = foundFMessage.FTopic.Id;
+                    Html.RenderPartial("Partials/CreateMsgsLinks", foundFMessage);
+                    Html.RenderPartial("Partials/FMessagePartial", fmessage, new ViewDataDictionary(ViewData));
+                }
+            }
+        </section>
+
+
+        <div class="Pager">
+            @Paging.GetPages(Html, (ItemPaging)Model.FoundFMsgPaging, "SearchFMessagesPageBtn", "SearchFMessagesPageInput", page => Url.Action("FoundFMessagesChangePage", new { page = page }))
+        </div>
+    </div>
+    }
+    else
+    {
+        <div id="FoundMessagesPlace" style="display:block; width:100%;"><font>Постов не найдено</font></div>
+    }
+</section>
+
+
+<div id="Dialog" class="Dialog">
+    <div id="DialogTitle" class="DialogTitle">
+
+    </div>
+
+    <button class="DialogBtn" id="FixTopicBtn" onclick="FixTopic()"></button>
+    <button class="DialogBtn" id="RenameItemBtn" onclick="RenameItem()">Переименовать</button>
+    <button class="DialogBtn" id="ReplaceItemBtn" onclick="RememberItem()">Переместить</button>
+</div>
+
+
+<div id="RenameDialog" class="Dialog">
+    <div id="RenameDialogTitle" class="DialogTitle">
+
+    </div>
+
+    <input id="RenameItemInput" maxlength="50"/>
+    <button class="RenameFinallyBtn" onclick="RenameFinally()">Переименовать</button>
+</div>
+
+
+<div id="MsgDialog" class="Dialog">
+    <div id="MsgDialogTitle" class="DialogTitle">
+
+    </div>
+</div>
+
+<div id="EditMsgDialog">
+    <div class="DialogTitle" id="EditMsgDialogTitle">
+
+    </div>
+
+    <textarea id="MsgEditTextarea"></textarea>
+    <button class="NormalBtn" onclick="EditMsgOk()">Изменить</button>
+    <button class="NormalBtn" onclick="CloseEditMsgDialog()">Отмена</button>
+</div>
+
+@section Scripts {
+<script>
+
+</script>
+}

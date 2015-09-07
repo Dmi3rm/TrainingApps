@@ -1,0 +1,33 @@
+﻿@using FS.Web.Models;
+
+@{
+    Layout = "~/Views/Shared/Forum/_ForumLayout.cshtml";
+}
+
+@section Title {
+    NS Forum: Новый раздел
+}
+
+@section FSearch {
+    <button onclick="Search(this)" id="SearchForumBtn"><img src="/Content/images/HomePage/Lupa.png" width="22" height="22" /></button>
+}
+
+@section FPlace {
+    <tr id="FPlace">
+        <td><center>@Html.ActionLink("<< Разделы <<", "FSections", "Forum", null, new { @class = "HeaderLink" })</center></td>
+        <td><center>Новый раздел</center></td>
+        <td><center>&nbsp;</center></td>
+    </tr>
+}
+
+<section id="FItems" class="NewItemSection">
+    <center>
+        @using (Html.BeginForm("NewFSection", "Forum", FormMethod.Post))
+        {
+            <label for="Name">Название</label>
+            <input type="text" name="sName" id="STName" maxlength="50" />
+
+            <input type="submit" value="Создать" />
+        }
+    </center>
+</section>

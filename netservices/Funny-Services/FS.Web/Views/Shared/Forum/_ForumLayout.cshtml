@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Title {
+    @RenderSection("Title", false)
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/Content/StylesForum.css" />
+}
+
+<table id="FHeader">
+    <tr id="TitleTr">
+        <td id="TitleFSTd"><a href="/Home/Index">Net Services</a></td>
+        <td id="TitleEmptyTd"><center>Форум</center></td>
+        <td id="TitleSearchTd">
+            <table id="SearchTable">
+                <tr>
+                    <td><font>Поиск</font></td>
+                    <td><input type="text" id="SearchInput" maxlength="150"/></td>
+                    <td>@RenderSection("FSearch")</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    @RenderSection("FPlace")
+</table>
+
+
+@RenderBody()
+
+
+<footer id="FFooter">
+    <table id="FFooterTable">
+        <tr>
+            <td><a href="/Home/Index" class="FLink">Home</a></td>
+            <td><a href="/Home/Index" class="FLink">Rules</a></td>
+            <td>
+                @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink(System.Web.HttpContext.Current.User.Identity.Name, "UserPage", "User", null, new { @class = "FLink" })
+                }
+                else
+                {
+                    @Html.ActionLink("Login", "Login", "Account", null, new { @class = "FLink" })
+            }</td>
+</tr>
+    </table>
+</footer>
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/Jquery/jquery-ui/jquery-ui.min.js")
+    <script type="text/javascript" src="/Scripts/SitePages/Forum/ForumScript.js"></script>
+    @RenderSection("Scripts", false)
+}

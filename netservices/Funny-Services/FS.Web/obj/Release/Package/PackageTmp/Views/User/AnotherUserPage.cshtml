@@ -1,0 +1,17 @@
+﻿@using FS.Web.Models;
+@model User
+@{
+    Layout = "~/Views/Shared/User/_UserLayout.cshtml";
+}
+
+@section Title {
+    @Model.Login
+}
+
+<img class="AvaImg" src="@Url.Action("GetImageByUserId", "User", new { userId = Model.Id })" />
+
+<center class="UserName"><b><font style="font-size:18px;">@Model.Login</font></b></center>
+
+<a href="" class="UserMenuLinkInactive">Друзья</a>
+<a href="" class="UserMenuLinkInactive">Подписчики</a>
+<a href="" class="UserMenuLinkInactive">Сообщения</a>

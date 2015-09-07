@@ -1,0 +1,14 @@
+﻿@using FS.Web.Models;
+@model List<SVideo>
+
+@for (int i = Model.Count() - 1; i >= 0; i--)
+{
+    SVideo svideo = Model[i];
+    <article class="NewArticle">
+        <font id="">@svideo.Name</font>
+        <button data-name="@svideo.Name" onclick="ShowVideoBtnClicked(this)">Show</button>
+        @Html.ActionLink("Edit", "EditSVideo", "Admin", new { SVideoId = svideo.Id }, new { @class = "EditNewLink" })
+        @Html.ActionLink("Remove", "RemoveSVideo", "Admin", new { svideoId = svideo.Id }, new { @class = "RemoveNewLink" })
+        <div id="@svideo.Name"></div>
+    </article>
+}

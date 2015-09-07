@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/Content/StylesAdmin.css" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/SitePages/Admin/AdminScript.js")
+    @RenderSection("Scripts", false)
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+
+<body>
+    @RenderBody()
+</body>
+</html>

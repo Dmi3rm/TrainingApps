@@ -1,0 +1,26 @@
+﻿@using FS.Web.Models
+@model SVideo
+
+@using (Html.BeginForm("EditSVideo", "Admin", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    <div style="margin-top:15px;">
+        @if (Model.VideoData == null)
+{
+
+}
+else
+{
+    <video controls style="width:300px;"><source src="@Url.Action("vid", "Home", new { name = Model.Name })" /></video>
+}
+        <div>
+            Upload new Video:
+            <input type="file" name="Movie" />
+        </div>
+    </div>
+
+    <div style="display:none;">@Html.EditorFor(m => m.Id)</div>
+    @Html.LabelFor(m => m.Name)
+    @Html.TextBoxFor(m => m.Name, new { maxlength = "50" })
+
+    <input type="submit" value="Save" />
+}

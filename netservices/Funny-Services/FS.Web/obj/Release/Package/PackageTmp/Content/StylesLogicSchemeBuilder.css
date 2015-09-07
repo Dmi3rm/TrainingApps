@@ -1,0 +1,113 @@
+html {width:100%; height:100%;
+}
+
+body {
+	margin:auto;
+	color:#000000;
+	background:#F4FF96;
+    width:100%;
+    height:100%;
+}
+
+@font-face {
+	font-family:'TWRegular';
+	src:url(fonts/TCCEB.ttf);
+	font-weight:normal;
+	font-style:normal;
+}
+
+@font-face {
+	font-family:'Stencil';
+	src:url(fonts/Stencil%20Normal.ttf);
+}
+
+a{text-decoration:none; color:#000000; padding-left:5px;}
+
+menu { 
+	background:#22D12B; 
+	font-family:"TWRegular"; 
+	margin:7px;
+	margin-top:2px;
+	margin-bottom:0px;
+	padding:0px;
+}
+
+ul {
+	margin:0px;
+	padding:2px;
+	list-style:none;
+	width:200px;
+}
+
+ul.menu li {
+	display:inline;
+	
+}
+
+menu ul li{
+	position:relative;
+}
+
+menu li ul{
+	position:absolute;
+	top:17px;
+	left:0px;
+	display:none;
+}
+
+menu ul li ul li a{
+	display:inline;
+	padding:0px;
+	border-bottom:1px solid black;
+	background:#22D12B;
+	width:60px;
+	padding-left:5px;
+}
+
+menu li:hover ul{ display:block;}
+menu li:hover ul li a {display:block;}
+
+#workingPanel{display:block;}
+#workingPlace{display:block; width:100%; height:60%;}
+
+#instruments {
+	margin:2px;
+	margin-right:20px;
+	padding-right:20px;
+	margin-left:7px;
+	display:inline;
+	float:left;
+	border-right:1px solid #000000;
+}
+#appRun {
+	margin:2px;
+	display:block;
+	float:left;
+}
+
+#workingPanel label{
+	font-family:"Stencil";
+	text-decoration:underline;
+	display:block;
+	margin: 6px;
+}
+
+#workingPanel ul{
+	display:inline;
+}
+
+#logicField {
+	background:#FFFFFF;
+	display:block;
+	margin:auto;
+	border:2px solid #22D12B;
+}
+
+#instruments li {display:inline;}
+#workingPanel li {display:inline;}
+
+#Reserv {display:none;}
+
+#AndBtn {margin-left:5px;}
+#RunBtn {margin-left:5px;}
+#Rubbish {float:right; display:inline;}

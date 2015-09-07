@@ -1,0 +1,544 @@
+/*Здесь шрифты TWRegular, Stencil, Broadway, Forte, HoboEx, Magneto*/
+@font-face {
+	font-family:'TWRegular';
+	src:url(fonts/TCCEB.ttf);
+	font-weight:normal;
+	font-style:normal;
+}
+
+@font-face {
+	font-family:'Stencil';
+	src:url(fonts/Stencil%20Normal.ttf);
+}
+
+@font-face {
+	font-family:'Broadway';
+	src:url(fonts/Broadway.ttf);
+}
+
+@font-face {
+	font-family:'Forte';
+	src:url(fonts/Forte.ttf);
+    font-weight:normal;
+	font-style:normal;
+}
+
+@font-face {
+	font-family:'HoboEx';
+	src:url(fonts/HoboEx.ttf);
+}
+
+@font-face {
+	font-family:'Magneto';
+	src:url(fonts/Magneto.ttf);
+}
+
+
+html {height:100%;}
+body { margin:0; margin-left:8%; margin-right:8%; margin-top:1%; width:84%; padding:0px; }
+
+
+
+/*---------------------------------------------------Header--------------------------------------------------------------------------*/
+#FHeader {
+    width:100%;
+    height:90px;
+    background:#3eff20;
+}
+
+
+#TitleTr {
+    width:100%;
+}
+
+
+#TitleFSTd {
+    width:35%;
+    padding-left:10px;
+    font-family:Forte;
+    font-size:25px;
+}
+
+
+#TitleFSTd a {text-decoration:none; color:black;}
+
+
+#TitleEmptyTd {
+    width:30%;
+    font-family:'Hobo Ex';
+    font-size:25px;
+}
+
+
+#TitleSearchTd {
+    width:35%;
+}
+
+
+#SearchTable {
+    float:right;
+}
+
+#SearchForumBtn {
+    background:#3eff20;
+    border:0;
+}
+
+#SearchInput {
+    border:2px solid red;
+    background:orange;
+}
+
+
+.HeaderLink {
+    text-decoration:none;
+    color:black;
+    padding:2px;
+    border:3px solid red;
+    background-color:orange;
+}
+
+
+
+.UserLink {
+    text-decoration:none;
+    color:#7c0000;
+}
+
+/*---------------------------------------------------Body--------------------------------------------------------------------------*/
+
+/*Таблица секций, строки*/
+#FItems {
+    width:100%;
+    margin-top:25px;
+    margin-bottom:25px;
+    border-bottom:3px solid orange;
+}
+
+#FItems button {
+    border:0;
+}
+
+#FTopics {
+    width:100%;  
+    border-bottom:3px solid orange;  
+}
+
+#FTopics button {
+    border:0;
+}
+
+#FItems td {
+    margin:0;
+    padding:0;
+}
+
+
+#FBodyHeadTr {
+    width:100%;
+    background:orange;
+    height:50px;
+    border-collapse: collapse;
+	border-spacing: 0;
+	border: 0;
+}
+
+
+.FBodyTr {
+    width:100%;
+}
+
+
+.FBodyTr:nth-child(odd) {
+    background:#dedede;
+}
+
+.FBodyTr:nth-child(odd) button {
+    background-color:#dedede;
+}
+
+
+.FBodyTr:nth-child(even) {
+    background:#e9f3e9;
+}
+
+.FBodyTr:nth-child(even) button {
+    background-color:#e9f3e9;
+}
+
+
+/*Ячейки таблицы секций*/
+.FixTd {
+    width:1%;
+}
+
+
+.AdminLowLinkTd {
+    width:65%;
+    margin:0px;
+}
+
+
+.LowLinkTd {
+    width:65%;
+    margin:0px;
+}
+
+
+.Stat1 {
+    width:10%;
+}
+
+
+.Stat2 {
+    width:10%;
+}
+
+
+.Stat3 {
+    width:10%;
+}
+
+
+.Stat3Date {
+    width:15%;
+}
+
+
+
+/* Ссылка на уровень ниже: ячейки со ссылкой, рукой и мусоркой*/
+.AdminLowLinkTextTd {
+    width:90%;
+}
+
+
+.AdminEditHandTd {
+    width:5%;
+}
+
+
+.AdminDeleteMusorTd {
+    width:5%;
+}
+
+.AdminDeleteMusorBtn {
+    display:block;
+}
+
+.SectionLink {
+    text-decoration:none;
+    color:black;
+    display:block;
+    width:100%;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+
+
+
+/*Сообщения*/
+#FMessages {
+    width:100%;
+    margin-bottom:10px;
+    margin-top:10px;
+    border-top:2px solid orange;
+     border-bottom:2px solid orange;
+}
+
+#FMessages button {
+    border:0;
+    float:right;
+}
+
+.DivMsg:nth-child(odd)
+{
+    background:#dedede;
+}
+
+.DivMsg:nth-child(odd) button {
+    background:#dedede;
+}
+
+.DivMsg:nth-child(even)
+{
+    background:#e9f3e9;
+}
+
+.DivMsg:nth-child(even) button {
+    background:#e9f3e9;
+}
+
+.DivMsg {
+    padding:10px;
+    float:none;
+}
+
+
+ .MsgUserAva {
+     float:left;
+     max-height:50px;
+     max-width :50px;
+     margin:5px;
+ }
+
+
+ #NewMsgSide {
+     
+     margin-left:5%;
+     width:90%;
+     min-height:50px;
+     border:1px solid black;
+     border-radius:10px;
+ }
+
+
+ #SendMsgBtn {
+     margin-left:5%;
+     margin-bottom:15px;
+ }
+
+
+
+ .NewItemSection{
+     padding-top:15px;
+     padding-bottom:15px;
+     border-top:2px solid orange;
+     border-bottom:2px solid orange;
+ }
+
+
+ .NoItemsSection {
+     padding-top:15px;
+     padding-bottom:15px;
+     border-top:2px solid orange;
+     border-bottom:2px solid orange;
+     margin-top:25px;
+     margin-bottom:25px;
+ }
+
+
+
+
+ .Pager {
+     text-align:right;
+     margin-top:10px;
+     margin-bottom:10px;
+ }
+
+
+ .PageLink {
+     font-size:1.1em;
+     text-decoration:none;
+     padding: 0 .4em 0 .4em;
+     color:black;
+ }
+
+
+ .PageLink:hover {
+     background:orange;
+ }
+
+
+ .CurrentPageLink {
+     font-size:1.1em;
+     text-decoration:none;
+     padding: 0 .4em 0 .4em;
+     background:red;
+     color:black;
+ }
+
+
+ .GoPageInput {
+     margin-left:10px;
+     width:30px;
+ }
+
+
+ .SearchFMessagesPageInput {
+     margin-left:10px;
+     width:30px;
+ }
+
+
+  .SearchFTopicsPageInput {
+     margin-left:10px;
+     width:30px;
+ }
+/*---------------------------------------------------Footer--------------------------------------------------------------------------*/
+
+
+#FFooter {
+    width:100%;
+    background:#3eff20;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-bottom:25px;
+}
+
+
+.FLink {
+    text-decoration:none;
+    color:black;
+    padding:2px;
+}
+
+
+#FFooterTable {
+    margin-left:15px;
+}
+
+
+/*-------------------------------------------------------------Dialog-----------------------------------------------------------------*/
+
+.Dialog {
+    background-color:#e9f3e9;
+    display:none;
+    min-height:200px;
+    min-width:300px;
+    border:1px solid orange;
+}
+
+
+#EditMsgDialog {
+    background-color:#e9f3e9;
+    display:none;
+    min-height:700px;
+    min-width:800px;
+    border:1px solid orange;
+}
+
+
+.ui-dialog-titlebar {
+    display:none;
+}
+
+
+.DialogTitle {
+    width:100%;
+    background-color:orange;
+    padding-top:3px;
+    padding-bottom:3px;
+}
+
+
+#CloseDialogBtn {
+    float:right;
+    background-color:orange;
+    border:1px solid black;
+    margin:0px;
+    margin-right:1%;
+}
+
+.DialogBtn {
+    background-color:white;
+    border:1px solid orange;
+    width:96%;
+    margin-left:2%;
+    margin-right:2%;
+}
+
+.NormalBtn {
+    background-color:white;
+    border:1px solid orange;
+    margin-left:3%;
+    margin-bottom:15px;
+}
+
+.InputNoItem {
+    background-color:white;
+    border:1px solid orange;
+    width:96%;
+    margin-left:2%;
+    margin-right:2%;
+    color:#c1c1c1;
+}
+
+
+#MsgEditTextarea{
+    width:93%;
+    margin-left:3%;
+    margin-right:4%;
+    margin-top:10px;
+    border:1px solid #808080;
+    min-height:150px;
+    margin-bottom:10px;
+}
+
+
+#RenameItemInput {
+    width:90%;
+    margin-right:5%;
+    margin-left:4%;
+    margin-top:10px;
+}
+
+
+.RenameFinallyBtn {
+    margin-top:5px;
+    margin-left:4%;
+}
+
+
+.DeleteLastBtn {
+    float:left;
+    margin-left:25%;
+}
+
+
+.DeleteCancelBtn {
+    float:right;
+    margin-right:25%;
+}
+
+
+/*----------------------------------------------------------------------   ПОИСК   ----------------------------------------------------------------*/
+
+#SearchSection {
+    margin-bottom:20px;
+    margin-top: 20px;
+}
+
+
+#SearchHeader {
+    text-align:center;
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
+
+#SearchTopicsHeader{
+    text-align:center;
+    margin-top:20px;
+    margin-bottom:15px;
+}
+
+
+#SearchMessagesHeader{
+    text-align:center;
+    margin-top:25px;
+    margin-bottom:15px;
+}
+
+
+#FoundTopicsPlace {
+    border-bottom:1px dashed;
+}
+
+
+.SearchHeaderText {
+    font-size:20px;
+}
+
+.SearchItemsText {
+    font-size:18px;
+}
+
+.ShowFoundBtn {
+    margin-left:10px;
+}
+
+
+.DeleteFMsgBtn {
+    float:right;
+}
